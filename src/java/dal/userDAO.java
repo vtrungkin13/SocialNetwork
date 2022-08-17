@@ -48,17 +48,19 @@ public class userDAO extends DBContext {
     }
     
     public void addUser(User u) {
-        String sql = "insert into [user] ([username], [password], [name], [dob], [gender], [userid])"
-                + " values(?, ?, ?, ?, ?, ?)";
+        String sql = "insert into [user] ([username], [password], [name], [avatar], [gender], [dob], [userid])"
+                + " values(?, ?, ?, ?, ?, ?, ?)";
+        String avatar = "default-avatar.jpg";
         long size = getUsers().size();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, u.getUsername());
             ps.setString(2, u.getPassword());
             ps.setString(3, u.getName());
-            ps.setDate(4, u.getDob());
+            ps.setString(4, avatar);
             ps.setBoolean(5, u.getGender());
-            ps.setString(6, String.valueOf(++size));
+            ps.setDate(6, u.getDob());
+            ps.setString(7, String.valueOf(++size));
             ps.executeUpdate();
         } catch (SQLException e) {
             
@@ -191,6 +193,31 @@ public class userDAO extends DBContext {
                         rs.getString(9));
             }
         } catch (SQLException e) {
+            
+        }
+        return null;
+    }
+    
+    public User getUserByUsernameAndPassword(String username, String password) {
+        String sql = "select * from [user] where [username] = ? and [password] = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                return new User(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getBoolean(7),
+                        rs.getDate(8),
+                        rs.getString(9));
+            }
+        } catch(SQLException e) {
             
         }
         return null;

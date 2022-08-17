@@ -12,7 +12,8 @@
     <!-- mobile -->
     <div class="flex flex-col justify-center sm:bg-gray-50">
       <div class="flex justify-center">
-          <form class="mt-32 flex flex-col justify-center rounded-xl sm:border border-gray-200 bg-white p-8" action="signin" method="post">
+          <form class="mt-32 flex flex-col justify-center rounded-xl sm:border border-gray-200 bg-white p-8" 
+                action="signin" method="post">
           <div class="hidden">
             <span>English</span>
             <i class="bi bi-chevron-down"></i>
@@ -38,7 +39,8 @@
           <div class="mt-4 flex justify-end">
             <a class="text-sm text-blue-700" href="#">Forget password</a>
           </div>
-          <button class="my-6 h-10 bg-blue-400 font-bold text-white opacity-60 hover:opacity-100" type="submit">Sign in</button>
+          <button class="my-6 h-10 bg-blue-400 font-bold text-white opacity-60 hover:opacity-100" 
+                  type="submit">Sign in</button>
           <p class="flex justify-end text-sm">
             Don't have account?
             <a class="ml-1 text-blue-700" href="signup">Sign up</a>

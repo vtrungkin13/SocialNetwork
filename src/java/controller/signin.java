@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.User;
 
@@ -67,10 +68,11 @@ public class signin extends HttpServlet {
         String username = request.getParameter("user");
         String password = request.getParameter("pass");
         
+        HttpSession session = request.getSession();
         userDAO ud = new userDAO();
-        List<User> users = ud.getUsers();
-        User u = ud.getUserByUsername(username);
-        if (u.getPassword().equals(password)) {
+        User u = ud.getUserByUsernameAndPassword(username, password);
+        if (u != null) {
+            session.setAttribute("user", u);
             response.sendRedirect("home");
         } else {
             request.setAttribute("invalidSignin", "Invalid username or password");
