@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.User;
 
 /**
  *
@@ -61,7 +64,18 @@ public class signin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String username = request.getParameter("user");
+        String password = request.getParameter("pass");
+        
+        userDAO ud = new userDAO();
+        List<User> users = ud.getUsers();
+        User u = ud.getUserByUsername(username);
+        if (u.getPassword().equals(password)) {
+            response.sendRedirect("home");
+        } else {
+            request.setAttribute("invalidSignin", "Invalid username or password");
+            request.getRequestDispatcher("signin.jsp").forward(request, response);
+        }
     }
 
     /** 

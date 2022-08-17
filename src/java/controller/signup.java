@@ -75,9 +75,9 @@ public class signup extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String repassword = request.getParameter("repassword");
+        String username = request.getParameter("user");
+        String password = request.getParameter("pass");
+        String repassword = request.getParameter("repass");
         String name = request.getParameter("name");
         String gender = request.getParameter("gender");
         String date = request.getParameter("dob");
@@ -86,18 +86,19 @@ public class signup extends HttpServlet {
         
         userDAO ud = new userDAO();
 
-        List<User> users = ud.getUsers();
         User u = ud.getUserByUsername(username);
-        if (!users.contains(u)) {
+        if (u == null) {
             if (password.equals(repassword)) {
                 User user = new User(username, password, name, gender.equals("male"), dob);
                 ud.addUser(user);
                 response.sendRedirect("home");
             } else {
-                response.sendRedirect("signup");
+                request.setAttribute("passNotMatch", "Password does not match");
+                request.getRequestDispatcher("signup.jsp").forward(request, response);
             }
         } else {
-            response.sendRedirect("signup");
+            request.setAttribute("existedUser", "Username has been existed");
+            request.getRequestDispatcher("signup.jsp").forward(request, response);
         }
     }
 
