@@ -23,7 +23,7 @@
 
         <!-- Navbar  -->
         <div class="flex md:ml-12 xl:ml-20 2xl:ml-40">
-          <a class="" href="#">
+          <a id="icon-newpost" href="#">
             <i class="ri-add-box-line mr-2 text-3xl"></i>
           </a>
           <div id="icon-friend" class="relative">
@@ -111,7 +111,7 @@
           </div>
           <!--User subnav  -->
           <div class="relative">
-            <img id="icon-user" class="ml-2 h-8 w-8 cursor-pointer rounded-full transition"  src="https://play-lh.googleusercontent.com/XVHP0sBKrRJYZq_dB1RalwSmx5TcYYRRfYMFO18jgNAnxHAIA1osxM55XHYTb3LpkV8" alt="cute cat" />
+            <img id="icon-user" class="ml-2 h-8 w-8 cursor-pointer rounded-full transition" src="https://play-lh.googleusercontent.com/XVHP0sBKrRJYZq_dB1RalwSmx5TcYYRRfYMFO18jgNAnxHAIA1osxM55XHYTb3LpkV8" alt="cute cat" />
             <div id="subnav-user" class="absolute top-10 right-0 h-40 w-48 rounded-lg bg-white text-xl shadow-sm shadow-gray-600" style="visibility:hidden;">
               <div class="cursor-pointer pl-5 pt-1 pb-2 hover:rounded-lg hover:bg-gray-200">
                 <i class="bi bi-person-circle mr-3"></i>
@@ -131,7 +131,31 @@
         </div>
       </div>
     </div>
-
+    <!-- New post  -->
+    <div id="subnav-newpost" class="fixed z-50 h-screen w-screen bg-gray-500 bg-opacity-80" style="visibility: hidden;">
+      <div id="subnav-newpost-container" class="fixed rounded-3xl bg-white opacity-100" style="width: 600px; height: 800px;top: 50%;left: 50%;margin-top: -400px;margin-left: -300px;">
+        <div id="newpost-close" class="absolute top-0 mt-1 right-4 text-4xl cursor-pointer opacity-60 hover:opacity-100">x</div>
+        <div class="flex justify-center border-b border-gray-600 py-3 text-2xl">Create new post</div>
+        <div class="mx-auto mt-5 h-96 w-96 bg-gray-100">
+          <img src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="" />
+        </div>
+        <div class="flex justify-center">
+          <i class="ri-upload-line"></i>
+        </div>
+        <div class="flex justify-center text-2xl">
+          <p>Drag photos and videos here</p>
+        </div>
+        <div class="mx-auto mt-2 flex w-40 cursor-pointer justify-center rounded-lg bg-blue-400 p-2 font-bold text-white hover:bg-blue-500">
+          <p>Select from Device</p>
+        </div>
+        <div class="flex justify-center">
+          <textarea class="mt-6 rounded-md p-3 shadow-md shadow-gray-400 border border-gray-400" name="" id="" cols="60" rows="4" placeholder="What's in your mine"> </textarea>
+        </div>
+        <div class="flex justify-center">
+          <button class="mt-2 rounded-lg bg-blue-400 px-8 pb-2 pt-1 text-xl font-bold hover:bg-blue-500 text-white">Post</button>
+        </div>
+      </div>
+    </div>
     <!-- Container -->
     <div class="pt-10 sm:bg-gray-50 sm:pt-14">
       <!-- Story  -->
@@ -202,11 +226,28 @@
     var iconFriendHandler = document.getElementById("icon-friend");
     var iconNotifHandler = document.getElementById("icon-notif");
     var iconUserHandler = document.getElementById("icon-user");
+    var iconNewpostHandler = document.getElementById("icon-newpost");
     var subnavFriendHandler = document.getElementById("subnav-friend");
     var subnavNotifHandler = document.getElementById("subnav-notif");
     var subnavUserHandler = document.getElementById("subnav-user");
+    var newpostHandler = document.getElementById("subnav-newpost");
+    var newpostCloseHandler = document.getElementById("newpost-close");
+    var subnavNewpostContainerHandler = document.getElementById("subnav-newpost-container");
 
-    // Subnav Friend Handler 
+    // New post handler
+    iconNewpostHandler.addEventListener("click",function() {
+      newpostHandler.style.visibility = "visible";
+    })
+    document.addEventListener("click",function(e) {
+      if(!subnavNewpostContainerHandler.contains(e.target) && !iconNewpostHandler.contains(e.target)) {
+        newpostHandler.style.visibility = "hidden";
+      }
+    })
+    newpostCloseHandler.addEventListener("click", function() {
+      newpostHandler.style.visibility = "hidden";
+    })
+
+    // Subnav Friend Handler
     iconFriendHandler.addEventListener("click",function(){
       subnavFriendHandler.style.visibility = "visible";
     })
@@ -225,7 +266,7 @@
         subnavNotifHandler.style.visibility = "hidden";
       }
     })
-    // Subnav User Handler 
+    // Subnav User Handler
     iconUserHandler.addEventListener("click",function(){
       subnavUserHandler.style.visibility = "visible";
     })
@@ -234,6 +275,5 @@
         subnavUserHandler.style.visibility = "hidden";
       }
     })
-    
   </script>
 </html>
