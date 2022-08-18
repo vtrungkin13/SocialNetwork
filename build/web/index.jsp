@@ -41,7 +41,7 @@
              pt-1 pl-4 pr-4 text-2xl sm:border-b sm:pb-1 sm:pt-1 sm:text-2xl">
 
             <!-- Logo -->
-            <a class="" href="http://localhost:9999/SocialNetwork/">Instagram</a>
+            <a class="" href="home">Instagram</a>
 
             <!-- Search  -->
             <div class="sm:flex hidden">
