@@ -22,19 +22,19 @@
             <a href="#">Continue with Facebook</a>
             <p>OR</p>
           </div>
-          <div class="mt-2 border border-gray-300 bg-gray-50"><input class="w-56 p-1 bg-gray-50 focus:outline-none" 
+          <div class="mt-2 border border-gray-300 bg-gray-50"><input class="w-56 pl-1 p-1 bg-gray-50 focus:outline-none" 
           pattern="[a-z0-9]{8,}" title="Contain lowercase letter or number, at least 8 characters width" 
-          type="text" name="user" placeholder=" Username" required autofocus></div>
-          <div class="mt-2 border border-gray-300 bg-gray-50"><input class="w-56 p-1 bg-gray-50 focus:outline-none" 
+          type="text" name="user" placeholder="Username" required autofocus></div>
+          <div class="mt-2 border border-gray-300 bg-gray-50"><input class="w-56 pl-1 p-1 bg-gray-50 focus:outline-none" 
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" 
-          type="password" name="pass" placeholder=" Password" required ></div>
-          <div class="mt-2 border border-gray-300 bg-gray-50"><input class="w-56 p-1 bg-gray-50 focus:outline-none" 
+          type="password" name="pass" placeholder="Password" required ></div>
+          <div class="mt-2 border border-gray-300 bg-gray-50"><input class="w-56 pl-1 p-1 bg-gray-50 focus:outline-none" 
           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" 
-          type="password" name="repass" placeholder=" Retype Password" required ></div>
-          <div class="mt-2 border border-gray-300 bg-gray-50"><input class="w-56 p-1 bg-gray-50 focus:outline-none" 
+          type="password" name="repass" placeholder="Retype Password" required ></div>
+          <div class="mt-2 border border-gray-300 bg-gray-50"><input class="w-56 pl-1 p-1 bg-gray-50 focus:outline-none" 
           pattern="[a-zA-Z 0-9]{2,}" title="Contain uppercase, lowercase letter, space or number" 
-          type="text" name="name" placeholder=" Display name" required ></div>
-          <div class="mt-2 border border-gray-300 bg-gray-50"><input class="w-56 p-1 bg-gray-50 focus:outline-none w-56" 
+          type="text" name="name" placeholder="Display name" required ></div>
+          <div class="mt-2 border border-gray-300 bg-gray-50"><input class="w-56 pl-1 p-1 bg-gray-50 focus:outline-none w-56" 
           type="date" name="dob" required pattern="\d{2}-\d{2}-\d{4}" required ></div>
           <div class="flex justify-center">
             <div class="m-1">

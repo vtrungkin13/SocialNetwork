@@ -41,7 +41,7 @@
              pt-1 pl-4 pr-4 text-2xl sm:border-b sm:pb-1 sm:pt-1 sm:text-2xl">
 
             <!-- Logo -->
-            <a class="" href="home">Instagram</a>
+            <a class="" href="http://localhost:9999/SocialNetwork/">Instagram</a>
 
             <!-- Search  -->
             <div class="sm:flex hidden">
@@ -76,7 +76,7 @@
                             Settings
                         </div>
                         <div class="cursor-pointer pl-5 pt-1 pb-2 hover:bg-gray-200 hover:rounded-lg">
-                            <a href="signin">Log out</a>
+                            <a href="logout">Log out</a>
                         </div>
 
                     </div>
@@ -150,7 +150,7 @@
                         <div class="ml-2">
                             <p>NgÆ°á»i thÃ­ch: tungba.103 vÃ  25 ngÆ°á»i khÃ¡c</p>
                             <p>
-                                <span>kienvu</span> Tá» tá»nh dáº­y sau 2 ngÃ y liá»t giÆ°á»ng vÃ¬ cá» gáº¯ng tiáº¿t kiá»m tiá»n...
+                                <span>kienvu</span> Tôi tá»nh dáº­y sau 2 ngÃ y liá»t giÆ°á»ng vÃ¬ cá» gáº¯ng tiáº¿t kiá»m tiá»n...
                                 <span class="cursor-pointer text-gray-500">xem thÃªm</span>
                             </p>
                             <a href="#" class="text-gray-500">Xem 256 bÃ¬nh luáº­n</a>

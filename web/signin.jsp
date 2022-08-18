@@ -24,14 +24,14 @@
             <p>OR</p>
           </div>
           <div class="mt-2 border border-gray-300 bg-gray-50">
-              <input class="w-56 p-1 bg-gray-50 focus:outline-none" pattern="[a-zA-Z0-9]{8,}" 
+              <input class="w-56 pl-1 p-1 bg-gray-50 focus:outline-none" pattern="[a-zA-Z0-9]{8,}" 
                      title="Contain lowercase letter or number, at least 8 characters width="" 
-                     type="text" name="user" placeholder=" Username" required autofocus>
+                     type="text" name="user" placeholder="Username" required autofocus>
           </div>
           <div class="mt-2 border border-gray-300 bg-gray-50">
-              <input class="w-56 p-1 bg-gray-50 focus:outline-none" pattern="[a-zA-Z0-9]{8,}" 
+              <input class="w-56 pl-1 p-1 bg-gray-50 focus:outline-none" pattern="[a-zA-Z0-9]{8,}" 
                      title="Contain lowercase letter or number, at least 8 characters width="" 
-                     type="password" name="pass" placeholder=" Password" required autofocus>
+                     type="password" name="pass" placeholder="Password" required autofocus>
           </div>
           <div class="flex justify-end text-sm mt-2">
               <label>
