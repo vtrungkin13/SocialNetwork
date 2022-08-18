@@ -78,8 +78,10 @@ public class signin extends HttpServlet {
             Cookie cookie = new Cookie("user", u.getUsername());
             if (remember) {
                 cookie.setMaxAge(60 * 60 * 24 * 365);
-                response.addCookie(cookie);
+            } else {
+                cookie.setMaxAge(1);
             }
+            response.addCookie(cookie);
             session.setAttribute("user", u);
             response.sendRedirect("home");
         } else {

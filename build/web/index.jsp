@@ -1,3 +1,10 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="jakarta.servlet.http.Cookie"%>
+<%@page import="model.User"%>
+<%@page import="dal.userDAO"%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +16,25 @@
     <title>Home</title>
 </head>
 <body>
+    <!-- Redirect to sign in -->
+    <%
+        Cookie[] cookies = request.getCookies();
+        String username = "";
+        boolean rememberUser = false;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("user")) {
+                    username = cookie.getName();
+                    rememberUser = true;
+                }
+            }
+        }
+        if (rememberUser) {
+            userDAO ud = new userDAO();
+            User u = ud.getUserByUsername(username);
+            session.setAttribute("user", u);
+    %>
+    
     <!-- Navigation -->
     <div class="fixed top-0 left-0 right-0 z-40 bg-white">
         <div class="flex w-full sm:justify-center justify-between items-center 
@@ -122,30 +148,36 @@
                             <i class="bi bi-bookmark-plus mr-2 text-2xl"></i>
                         </div>
                         <div class="ml-2">
-                            <p>Người thích: tungba.103 và 25 người khác</p>
+                            <p>NgÆ°á»i thÃ­ch: tungba.103 vÃ  25 ngÆ°á»i khÃ¡c</p>
                             <p>
-                                <span>kienvu</span> Tớ tỉnh dậy sau 2 ngày liệt giường vì cố gắng tiết kiệm tiền...
-                                <span class="cursor-pointer text-gray-500">xem thêm</span>
+                                <span>kienvu</span> Tá» tá»nh dáº­y sau 2 ngÃ y liá»t giÆ°á»ng vÃ¬ cá» gáº¯ng tiáº¿t kiá»m tiá»n...
+                                <span class="cursor-pointer text-gray-500">xem thÃªm</span>
                             </p>
-                            <a href="#" class="text-gray-500">Xem 256 bình luận</a>
+                            <a href="#" class="text-gray-500">Xem 256 bÃ¬nh luáº­n</a>
                             <div class="mr-2 mt-1 flex justify-between">
                                 <div class="flex">
                                     <img class="mr-3 h-8 w-8 rounded-full" 
                                          src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="" />
-                                    <input type="text" placeholder="Thêm bình luận..." />
+                                    <input type="text" placeholder="ThÃªm bÃ¬nh luáº­n..." />
                                 </div>
                                 <div>
                                     <i class="bi bi-heart-fill mr-2"></i>
                                     <i class="bi bi-plus-circle"></i>
                                 </div>
                             </div>
-                            <p class="mt-1 mb-2 text-gray-500" style="font-size:10px">14 giờ trước</p>
+                            <p class="mt-1 mb-2 text-gray-500" style="font-size:10px">14 giá» trÆ°á»c</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <%    
+        } else {
+            response.sendRedirect("signin");
+        }
+    %>
 </body>
 <script>
     document.getElementById("avatar").addEventListener("click", function () {
