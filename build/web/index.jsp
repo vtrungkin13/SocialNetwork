@@ -24,7 +24,7 @@
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("user")) {
-                    username = cookie.getName();
+                    username = cookie.getValue();
                     rememberUser = true;
                 }
             }
