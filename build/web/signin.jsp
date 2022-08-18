@@ -33,6 +33,12 @@
                      title="Contain lowercase letter or number, at least 8 characters width="" 
                      type="password" name="pass" placeholder=" Password" required autofocus>
           </div>
+          <div class="flex justify-end text-sm mt-2">
+              <label>
+                  <input class="mx-1 cursor-pointer" type="checkbox" id="remember" name="remember">
+                  Remember me
+              </label>
+          </div>
           <div>
               <p class="mt-3 text-sm text-red-600">${requestScope.invalidSignin}</p>
           </div>

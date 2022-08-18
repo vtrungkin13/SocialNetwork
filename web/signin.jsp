@@ -34,7 +34,10 @@
                      type="password" name="pass" placeholder=" Password" required autofocus>
           </div>
           <div class="flex justify-end text-sm mt-2">
-            <input class="mx-1 cursor-pointer" type="checkbox">Remember me
+              <label>
+                  <input class="mx-1 cursor-pointer" type="checkbox" id="remember" name="remember">
+                  Remember me
+              </label>
           </div>
           <div>
               <p class="mt-3 text-sm text-red-600">${requestScope.invalidSignin}</p>

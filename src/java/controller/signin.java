@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -67,11 +68,18 @@ public class signin extends HttpServlet {
     throws ServletException, IOException {
         String username = request.getParameter("user");
         String password = request.getParameter("pass");
+        boolean remember = request.getParameter("remmember") != null;
         
         HttpSession session = request.getSession();
         userDAO ud = new userDAO();
         User u = ud.getUserByUsernameAndPassword(username, password);
+        
         if (u != null) {
+            Cookie cookie = new Cookie("user", u.getUsername());
+            if (remember) {
+                cookie.setMaxAge(60 * 60 * 24 * 365);
+                response.addCookie(cookie);
+            }
             session.setAttribute("user", u);
             response.sendRedirect("home");
         } else {
