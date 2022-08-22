@@ -187,13 +187,13 @@
                 </div>
                 <div class="flex mt-4 ml-4 2xl:ml-40 relative">
                     <div class="flex flex-col min-w-fit items-end mr-8 font-bold text-lg">
-                        <img class="w-14 h-14 rounded-full" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="" />
+                        <img class="w-14 h-14 rounded-full" src="avatar/${sessionScope.user.avatar}" alt="" />
                         <p class="mt-6">Old Password</p>
                         <p class="mt-6">New Password</p>
                         <p class="mt-6">Confirm New Password</p>
                     </div>
                     <div class="flex flex-col items-start">
-                        <p class="font-bold text-lg">tungba103</p>
+                        <p class="font-bold text-lg">${sessionScope.user.username}</p>
                         <p class="text-blue-500 font-bold cursor-pointer mb-2">Change profile photo</p>
                         <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" >
                         <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" >
