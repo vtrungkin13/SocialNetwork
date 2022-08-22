@@ -192,23 +192,32 @@
                         <p class="mt-6">Phone number</p>
                         <p class="mt-6">Gender</p>
                     </div>
-                    <div class="flex flex-col items-start">
-                        <p class="font-bold text-lg">tungba103</p>
-                        <p class="text-blue-500 font-bold cursor-pointer mb-2">Change profile photo</p>
-                        <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" placeholder="Name">
-                        <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" placeholder="Username">
-                        <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" placeholder="Bio">
-                        <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" placeholder="Email">
-                        <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" placeholder="Phone number">
-                        <div class="mt-6">
-                            <input class="mr-1" name="gender" type="radio">Male 
-                            <input class="mr-1" name="gender" type="radio">Female
-                            <input class="mr-1" name="gender" type="radio">Prefer not to say
+                    <form action="action">
+                        <div class="flex flex-col items-start">
+                            <p class="font-bold text-lg">${sessionScope.user.name}</p>
+                            <div class="text-blue-500 font-bold cursor-pointer mb-2">
+                                <label for="photo" class="cursor-pointer">
+                                    Change proflie photo
+                                    <input style="display: none;" type="file" 
+                                           id="photo" name="photo" 
+                                           accept="image/png, image/jpeg">
+                                </label>
+                            </div>
+                            <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" placeholder="Name">
+                            <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" placeholder="Username">
+                            <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" placeholder="Bio">
+                            <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" placeholder="Email">
+                            <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" placeholder="Phone number">
+                            <div class="mt-6">
+                                <input class="mr-1" name="gender" type="radio">Male 
+                                <input class="mr-1" name="gender" type="radio">Female
+                                <input class="mr-1" name="gender" type="radio">Prefer not to say
+                            </div>
                         </div>
-                    </div>
-                    <div class="absolute bottom-6 left-60 border border-gray-600 px-2 py-1 rounded-lg bg-blue-400 hover:bg-blue-500 font-bold text-base ">
-                        <Button>Submit</Button>
-                    </div>
+                        <div class="absolute bottom-6 left-60 border border-gray-600 px-2 py-1 rounded-lg bg-blue-400 hover:bg-blue-500 font-bold text-base ">
+                            <Button>Submit</Button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

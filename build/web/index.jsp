@@ -16,25 +16,6 @@
         <title>Home</title>
     </head>
     <body>
-        <!-- Redirect to sign in -->
-        <%
-            Cookie[] cookies = request.getCookies();
-            String username = "";
-            boolean rememberUser = false;
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("user")) {
-                        username = cookie.getValue();
-                        rememberUser = true;
-                    }
-                }
-            }
-            if (rememberUser) {
-                userDAO ud = new userDAO();
-                User u = ud.getUserByUsername(username);
-                session.setAttribute("user", u);
-        %>
-
         <!-- Navigation -->
         <div class="fixed top-0 left-0 right-0 z-40 bg-white">
             <div class="flex w-full items-center justify-between pt-1 pl-4 pr-4 text-2xl sm:justify-center sm:border-b sm:pb-2 sm:pt-3 sm:text-3xl">
@@ -254,12 +235,6 @@
                 </div>
             </div>
         </div>
-
-        <%    
-            } else {
-                response.sendRedirect("signin");
-            }
-        %>
     </body>
     <script>
         var iconFriendHandler = document.getElementById("icon-friend");
