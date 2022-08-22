@@ -68,7 +68,9 @@ public class changepassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        String password = request.getParameter("pass");
+        String newpassword = request.getParameter("newpass");
+        String renewpassword = request.getParameter("renewpass");
     }
 
     /** 

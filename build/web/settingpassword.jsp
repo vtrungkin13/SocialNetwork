@@ -192,19 +192,21 @@
                         <p class="mt-6">New Password</p>
                         <p class="mt-6">Confirm New Password</p>
                     </div>
-                    <div class="flex flex-col items-start">
-                        <p class="font-bold text-lg">${sessionScope.user.username}</p>
-                        <p class="text-blue-500 font-bold cursor-pointer mb-2">Change profile photo</p>
-                        <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" >
-                        <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" >
-                        <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" >
-                    </div>
-                    <div class="absolute top-60 left-60 ">
-                        <Button class="border border-gray-600 px-2 py-1 rounded-lg bg-blue-400 hover:bg-blue-500 font-bold text-base mb-1">Change password</Button>
-                        <div>
-                            <a href="#" class="text-sm text-blue-500 font-bold ml-8">Forgot password?</a>
+                    <form action="changepassword" method="post">
+                        <div class="flex flex-col items-start">
+                            <p class="font-bold text-lg">${sessionScope.user.username}</p>
+                            <p class="text-blue-500 font-bold cursor-pointer mb-2">Change profile photo</p>
+                            <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="password" name="pass">
+                            <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="password" name="newpass">
+                            <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="password" name="renewpass">
                         </div>
-                    </div>
+                        <div class="absolute top-60 left-60 ">
+                            <Button class="border border-gray-600 px-2 py-1 rounded-lg bg-blue-400 hover:bg-blue-500 font-bold text-base mb-1">Change password</Button>
+                            <div>
+                                <a href="#" class="text-sm text-blue-500 font-bold ml-8">Forgot password?</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
