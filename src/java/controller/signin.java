@@ -87,7 +87,7 @@ public class signin extends HttpServlet {
         User u = ud.getUserByUsernameAndPassword(username, password);
         
         if (u != null) {
-            Cookie cookie = new Cookie("user", u.getUsername());
+            Cookie cookie = new Cookie("user", String.valueOf(u.getUserid()));
             if (remember) {
                 cookie.setMaxAge(60 * 60 * 24 * 365);
             } else {

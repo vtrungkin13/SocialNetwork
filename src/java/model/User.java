@@ -14,12 +14,13 @@ public class User {
     private String username;
     private String password;
     private String name;
+    private String bio;
     private String mail;
     private String phone;
     private String avatar;
     private boolean gender;
     private Date dob;  
-    private String userid;
+    private long userid;
     
     public User() {    
     }
@@ -32,7 +33,7 @@ public class User {
         this.dob = dob;
     }
 
-    public User(String username, String password, String name, boolean gender, Date dob, String userid) {
+    public User(String username, String password, String name, boolean gender, Date dob, long userid) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -41,10 +42,11 @@ public class User {
         this.userid = userid;
     }
 
-    public User(String username, String password, String name, String mail, String phone, String avatar, boolean gender, Date dob, String userid) {
+    public User(String username, String password, String name, String bio, String mail, String phone, String avatar, boolean gender, Date dob, long userid) {
         this.username = username;
         this.password = password;
         this.name = name;
+        this.bio = bio;
         this.mail = mail;
         this.phone = phone;
         this.avatar = avatar;
@@ -75,6 +77,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public String getMail() {
@@ -117,11 +127,11 @@ public class User {
         this.dob = dob;
     }
 
-    public String getUserid() {
+    public long getUserid() {
         return userid;
     }
 
-    public void setUserid(String userid) {
+    public void setUserid(long userid) {
         this.userid = userid;
     }
     

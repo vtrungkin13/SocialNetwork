@@ -20,7 +20,10 @@
 
                 <!-- Search  -->
                 <div class="hidden sm:flex">
-                    <input class="rounded-lg bg-gray-200 p-1 pl-4 text-sm focus:outline-none" type="text" placeholder="Seach..." />
+                    <form class="text-sm" action="search">
+                        <input class="rounded-lg bg-gray-200 p-1 pl-4 text-sm focus:outline-none" type="text" placeholder="Seach..." />
+                        <button class="hidden text-sm">Search</button>
+                    </form>
                 </div>
 
                 <!-- Navbar  -->
@@ -169,10 +172,10 @@
         <div class="-z-10 h-screen bg-gray-50">
             <div class="2xl:mx-80 xl:mx-52 sm:mx-12  pt-20">
                 <div class="mt-4">
-                    <img id="avatar" class="float-left h-40 w-40 mx-12 rounded-full cursor-pointer" src="https://play-lh.googleusercontent.com/XVHP0sBKrRJYZq_dB1RalwSmx5TcYYRRfYMFO18jgNAnxHAIA1osxM55XHYTb3LpkV8" alt="cute cat" />
+                    <img id="avatar" class="float-left h-40 w-40 mx-12 rounded-full cursor-pointer" src="avatar/${sessionScope.user.avatar}" alt="" />
                     <div class="">
                         <div class="flex justify-start items-center mb-5">
-                            <p class="text-3xl font-thin">tungba103</p>
+                            <p class="text-3xl font-thin">${sessionScope.user.username}</p>
                             <a href="edit" class="border border-gray-400 h-7 px-2 ml-6 text-sm pt-0.5 font-bold cursor-pointer bg-gray-50">Edit Profile</a>
                             <a href="edit">
                                 <i class="ri-settings-5-line text-3xl opacity-90 hover:opacity-100 ml-2"></i>
@@ -296,8 +299,8 @@
                             </div>
                         </div>
                         <div class="mb-6">
-                            <p class="text-xl font-bold" >BÃ¡ TÃ¹ng</p>
-                            <p class="">Hello from Tung Bo with love. </p>
+                            <p class="text-xl font-bold" >${sessionScope.user.name}</p>
+                            <p class="">${sessionScope.user.bio}</p>
                         </div>
                     </div>
                 </div>

@@ -116,19 +116,19 @@ public class cookiefilter implements Filter {
         HttpSession session = req.getSession();
         
         Cookie[] cookies = req.getCookies();
-            String username = "";
+            long userid = 0;
             boolean rememberUser = false;
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("user")) {
-                        username = cookie.getValue();
+                        userid = Long.valueOf(cookie.getValue());
                         rememberUser = true;
                     }
                 }
             }
             if (rememberUser) {
                 userDAO ud = new userDAO();
-                User u = ud.getUserByUsername(username);
+                User u = ud.getUserByUserid(userid);
                 session.setAttribute("user", u);
             } else {
                 resp.sendRedirect("signin");

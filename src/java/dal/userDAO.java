@@ -36,9 +36,10 @@ public class userDAO extends DBContext {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
-                        rs.getBoolean(7),
-                        rs.getDate(8),
-                        rs.getString(9));
+                        rs.getString(7),
+                        rs.getBoolean(8),
+                        rs.getDate(9),
+                        rs.getLong(10));
                 users.add(u);
             }
         } catch (SQLException e) {
@@ -50,7 +51,7 @@ public class userDAO extends DBContext {
     public void addUser(User u) {
         String sql = "insert into [user] ([username], [password], [name], [avatar], [gender], [dob], [userid])"
                 + " values(?, ?, ?, ?, ?, ?, ?)";
-        String avatar = "default-avatar.jpg";
+        String avatar = "default-avatar.png";
         long size = getUsers().size();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -60,118 +61,162 @@ public class userDAO extends DBContext {
             ps.setString(4, avatar);
             ps.setBoolean(5, u.getGender());
             ps.setDate(6, u.getDob());
-            ps.setString(7, String.valueOf(++size));
+            ps.setLong(7, ++size);
             ps.executeUpdate();
         } catch (SQLException e) {
             
         }
     }
     
-    public void deleteUser(String username) {
-        String sql = "delete from [user] where [username] = ?";
+    public void deleteUser(long userid) {
+        String sql = "delete from [user] where [userid] = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setLong(1, userid);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            
+        }
+    }
+    
+    public void updateUser(long userid, String username, String name, String mail, String bio, String phone, boolean gender, Date dob) {
+        String sql = "update [user] set [username] = ?, [name] = ?, [bio] = ?, [mail] = ?, "
+                + "[phone] = ?, [gender] = ?, [dob] = ? where [userid] = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, username);
+            ps.setString(2, name);
+            ps.setString(3, bio);
+            ps.setString(4, mail);
+            ps.setString(5, phone);
+            ps.setBoolean(6, gender);
+            ps.setDate(7, dob);
+            ps.setLong(8, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
             
         }
     }
     
-    public void updateName(String username, String name) {
-        String sql = "update [user] set [name] = ? where [username] = ?";
+    public void updateUsername(long userid, String username) {
+        String sql = "update [user] set [username] = ? where [userid] = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setLong(2, userid);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            
+        }
+    }
+    
+    public void updateName(long userid, String name) {
+        String sql = "update [user] set [name] = ? where [userid] = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, name);
-            ps.setString(2, username);
+            ps.setLong(2, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
             
         }
     }
     
-    public void updateMail(String username, String mail) {
-        String sql = "update [user] set [mail] = ? where [username] = ?";
+    public void updateMail(long userid, String mail) {
+        String sql = "update [user] set [mail] = ? where [userid] = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, mail);
-            ps.setString(2, username);
+            ps.setLong(2, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
             
         }
     }
     
-    public void updatePhone(String username, String phone) {
-        String sql = "update [user] set [phone] = ? where [username] = ?";
+    public void updatePhone(long userid, String phone) {
+        String sql = "update [user] set [phone] = ? where [userid] = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, phone);
-            ps.setString(2, username);
+            ps.setLong(2, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
             
         }
     }
     
-    public void updateAvatar(String username, String avatar) {
-        String sql = "update [user] set [avatar] = ? where [username] = ?";
+    public void updateAvatar(long userid, String avatar) {
+        String sql = "update [user] set [avatar] = ? where [userid] = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, avatar);
-            ps.setString(2, username);
+            ps.setLong(2, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
             
         }
     }
     
-    public void updateGender(String username, boolean gender) {
-        String sql = "update [user] set [gender] = ? where [username] = ?";
+    public void updateGender(long userid, boolean gender) {
+        String sql = "update [user] set [gender] = ? where [userid] = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setBoolean(1, gender);
-            ps.setString(2, username);
+            ps.setLong(2, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
             
         }
     }
     
-    public void updateDob(String username, Date dob) {
+    public void updateDob(long userid, Date dob) {
         String sql = "update [user] set [dob] = ? where [username] = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setDate(1, dob);
-            ps.setString(2, username);
+            ps.setLong(2, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
             
         }
     }
     
-    public void updateUserid(String username, String userid) {
-        String sql = "update [user] set [userid] = ? where [username] = ?";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, userid);
-            ps.setString(2, username);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            
-        }
-    }
-    
-    public void updatePassword(String username, String password) {
-        String sql = "update [user] set [password] = ? where [username] = ?";
+    public void updatePassword(long userid, String password) {
+        String sql = "update [user] set [password] = ? where [userid] = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, password);
-            ps.setString(2, username);
+            ps.setLong(2, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
             
         }
+    }
+    
+    public User getUserByUserid(long userid) {
+        String sql = "select * from [user] where [userid] = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setLong(1, userid);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new User(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getBoolean(8),
+                        rs.getDate(9),
+                        rs.getLong(10));
+            }
+        } catch (SQLException e) {
+            
+        }
+        return null;
     }
     
     public User getUserByUsername(String username) {
@@ -188,9 +233,10 @@ public class userDAO extends DBContext {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
-                        rs.getBoolean(7),
-                        rs.getDate(8),
-                        rs.getString(9));
+                        rs.getString(7),
+                        rs.getBoolean(8),
+                        rs.getDate(9),
+                        rs.getLong(10));
             }
         } catch (SQLException e) {
             
@@ -213,9 +259,10 @@ public class userDAO extends DBContext {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
-                        rs.getBoolean(7),
-                        rs.getDate(8),
-                        rs.getString(9));
+                        rs.getString(7),
+                        rs.getBoolean(8),
+                        rs.getDate(9),
+                        rs.getLong(10));
             }
         } catch(SQLException e) {
             

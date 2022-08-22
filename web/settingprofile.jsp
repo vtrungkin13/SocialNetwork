@@ -20,7 +20,10 @@
 
                 <!-- Search  -->
                 <div class="hidden sm:flex">
-                    <input class="rounded-lg bg-gray-200 p-1 pl-4 text-sm focus:outline-none" type="text" placeholder="Seach..." />
+                    <form class="text-sm" action="search">
+                        <input class="rounded-lg bg-gray-200 p-1 pl-4 text-sm focus:outline-none" type="text" placeholder="Seach..." />
+                        <button class="hidden text-sm">Search</button>
+                    </form>
                 </div>
 
                 <!-- Navbar  -->
@@ -184,37 +187,39 @@
                 </div>
                 <div class="flex mt-4 ml-4 2xl:ml-40 relative">
                     <div class="flex flex-col min-w-fit items-end mr-8 font-bold text-lg">
-                        <img class="w-14 h-14 rounded-full" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="" />
-                        <p class="mt-6">Name</p>
-                        <p class="mt-6">Username</p>
-                        <p class="mt-6">Bio</p>
-                        <p class="mt-6">Email</p>
-                        <p class="mt-6">Phone number</p>
-                        <p class="mt-6">Gender</p>
+                        <img class="w-14 h-14 rounded-full" src="avatar/${sessionScope.user.avatar}" alt="" />
+                        <p class="mt-5">Name</p>
+                        <p class="mt-5">Username</p>
+                        <p class="mt-5">Bio</p>
+                        <p class="mt-5">Email</p>
+                        <p class="mt-5">Phone number</p>
+                        <p class="mt-5">Date of Birth</p>
+                        <p class="mt-5">Gender</p>
                     </div>
-                    <form action="action">
+                    <form action="edit" method="post">
                         <div class="flex flex-col items-start">
                             <p class="font-bold text-lg">${sessionScope.user.name}</p>
                             <div class="text-blue-500 font-bold cursor-pointer mb-2">
                                 <label for="photo" class="cursor-pointer">
                                     Change proflie photo
                                     <input style="display: none;" type="file" 
-                                           id="photo" name="photo" 
+                                           id="photo" name="avatar" 
                                            accept="image/png, image/jpeg">
                                 </label>
                             </div>
-                            <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" placeholder="Name">
-                            <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" placeholder="Username">
-                            <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" placeholder="Bio">
-                            <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" placeholder="Email">
-                            <input class="mt-6 pl-1 pt-0.5 pb-0.5" type="text" placeholder="Phone number">
-                            <div class="mt-6">
-                                <input class="mr-1" name="gender" type="radio">Male 
-                                <input class="mr-1" name="gender" type="radio">Female
-                                <input class="mr-1" name="gender" type="radio">Prefer not to say
+                            <input class="mt-5 pl-1 pt-0.5 pb-0.5" type="text" name="name" value="${sessionScope.user.name}" placeholder="Name">
+                            <input class="mt-5 pl-1 pt-0.5 pb-0.5" type="text" name="username" value="${sessionScope.user.username}" placeholder="Username">
+                            <input class="mt-5 pl-1 pt-0.5 pb-0.5" type="text" name="bio" value="${sessionScope.user.bio}" placeholder="Bio">
+                            <input class="mt-5 pl-1 pt-0.5 pb-0.5" type="text" name="mail" value="${sessionScope.user.mail}" placeholder="Email">
+                            <input class="mt-5 pl-1 pt-0.5 pb-0.5" type="text" pattern="[0-9]{8,}" name="phone" value="${sessionScope.user.phone}" placeholder="Phone number">
+                            <input class="mt-5 pl-1 pt-0.5 pb-0.5" type="date" name="dob" value="${sessionScope.user.dob}" placeholder="Dob">
+                            <div class="mt-5">
+                                <input class="mr-1" name="gender" value="Male" ${sessionScope.user.gender == true ? "checked" : ""} type="radio">Male 
+                                <input class="mr-1" name="gender" value="Female" ${sessionScope.user.gender == false ? "checked" : ""} type="radio">Female
+                                <!--<input class="mr-1" name="gender" value="" type="radio">Prefer not to say-->
                             </div>
                         </div>
-                        <div class="absolute bottom-6 left-60 border border-gray-600 px-2 py-1 rounded-lg bg-blue-400 hover:bg-blue-500 font-bold text-base ">
+                        <div class="absolute bottom-6 left-40 border border-gray-600 px-2 py-1 rounded-lg bg-blue-400 hover:bg-blue-500 font-bold text-base ">
                             <Button>Submit</Button>
                         </div>
                     </form>

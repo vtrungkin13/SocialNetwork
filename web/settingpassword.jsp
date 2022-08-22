@@ -20,7 +20,10 @@
 
                 <!-- Search  -->
                 <div class="hidden sm:flex">
-                    <input class="rounded-lg bg-gray-200 p-1 pl-4 text-sm focus:outline-none" type="text" placeholder="Seach..." />
+                    <form class="text-sm" action="search">
+                        <input class="rounded-lg bg-gray-200 p-1 pl-4 text-sm focus:outline-none" type="text" placeholder="Seach..." />
+                        <button class="hidden text-sm">Search</button>
+                    </form>
                 </div>
 
                 <!-- Navbar  -->

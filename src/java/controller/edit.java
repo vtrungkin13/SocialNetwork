@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.sql.Date;
+import model.User;
 
 /**
  *
@@ -68,7 +72,25 @@ public class edit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String name = request.getParameter("name");
+        String bio = request.getParameter("bio");
+        String mail = request.getParameter("mail");
+        String phone = request.getParameter("phone");
+        String avatar = request.getParameter("avatar");
+        Date dob = Date.valueOf(request.getParameter("dob"));
+        String gender = request.getParameter("gender");
         
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("user");
+        userDAO ud = new userDAO();
+        ud.updateUser(u.getUserid(), username, name, mail, bio, phone, gender.equals("Male"), dob);
+        
+        if (!avatar.equals("")) {
+            ud.updateAvatar(u.getUserid(), avatar);
+        }
+        
+        response.sendRedirect("edit");
     }
 
     /** 
