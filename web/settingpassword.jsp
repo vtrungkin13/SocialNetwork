@@ -173,7 +173,7 @@
             <div class="relative flex justify-start mx-24 2xl:mx-96 xl:mx-72 bg-blue-50">
                 <div class="bg-white min-w-fit border border-gray-200">
                     <ul class="">
-                        <li class=" pl-8 cursor-pointer p-3 text-base hover:bg-gray-100">Edit Profile</li>
+                        <li class=" pl-8 cursor-pointer p-3 text-base hover:bg-gray-100"><a href="edit">Edit Profile</a></li>
                         <li class="font-bold pl-8 cursor-pointer p-3 text-base hover:bg-gray-100">Change password</li>
                         <li class="pl-8 cursor-pointer p-3 text-base hover:bg-gray-100">Apps and websites</li>
                         <li class="pl-8 cursor-pointer p-3 text-base hover:bg-gray-100">Email notifications</li>
