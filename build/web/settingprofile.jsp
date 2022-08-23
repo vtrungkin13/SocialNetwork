@@ -209,7 +209,8 @@
                             </div>
                             <input class="mt-5 pl-1 pt-0.5 pb-0.5" type="text" name="name" value="${sessionScope.user.name}" placeholder="Name">
                             <input class="mt-5 pl-1 pt-0.5 pb-0.5" type="text" name="username" value="${sessionScope.user.username}" placeholder="Username">
-                            <input class="mt-5 pl-1 pt-0.5 pb-0.5" type="text" name="bio" value="${sessionScope.user.bio}" placeholder="Bio">
+                            <!-- <textarea class="mt-5 pl-1 pt-0.5 pb-0.5" name="bio" id="" cols="30" rows="10" placeholder="Bio></textarea> -->
+                            <textarea class="mt-5 pl-1 pt-0.5 pb-0.5" name="bio" id="" cols="30" rows="2" maxlength="150" placeholder="Bio">${sessionScope.user.bio}</textarea>
                             <input class="mt-5 pl-1 pt-0.5 pb-0.5" type="text" name="mail" value="${sessionScope.user.mail}" placeholder="Email">
                             <input class="mt-5 pl-1 pt-0.5 pb-0.5" type="text" pattern="[0-9]{8,}" name="phone" value="${sessionScope.user.phone}" placeholder="Phone number">
                             <input class="mt-5 pl-1 pt-0.5 pb-0.5" type="date" name="dob" value="${sessionScope.user.dob}" placeholder="Dob">
