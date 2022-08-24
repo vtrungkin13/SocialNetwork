@@ -1,0 +1,45 @@
+#icon-friend {
+    width:500px;
+    visibility:hidden;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    #icon-friend {
+        width: 300px;
+    }
+
+    /* #icon-notif {
+
+    }
+
+    #icon-user {
+
+    }
+
+    #icon-newpost {
+
+    } */
+
+  }
+
+
+  @media only screen and (min-width: 600px) {
+    #icon-friend {
+       width: 600px;
+    }
+
+    /* #icon-notif {
+
+    }
+
+    #icon-user {
+
+    }
+
+    #icon-newpost {
+
+    } */
+
+  }
