@@ -271,10 +271,10 @@ public class userDAO extends DBContext {
     }
 
     public List<User> getUsersSearch(long userid) {
-        String sql = "select u.[username], u.[name] from [user] u join [friend] f on u.Userid = f.friend\n"
+        String sql = "select u.[username], u.[name], u.[avatar] from [user] u join [friend] f on u.Userid = f.friend\n"
                 + "where f.[user] = ?\n"
                 + "union\n"
-                + "select [username], [name] from [user]";
+                + "select [username], [name], [avatar] from [user]";
         List<User> users = new ArrayList();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -284,6 +284,7 @@ public class userDAO extends DBContext {
                 User u = new User();
                 u.setUsername(rs.getString(1));
                 u.setName(rs.getString(2));
+                u.setAvatar(rs.getString(3));
                 users.add(u);
             }
         } catch (SQLException e) {
