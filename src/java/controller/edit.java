@@ -93,8 +93,6 @@ public class edit extends HttpServlet {
         ud.updateUser(u.getUserid(), username, name, mail, bio, phone, gender.equals("Male"), dob);
         
         if(part.getSize() > 0){
-            
-            
             String realPath = request.getServletContext().getRealPath("/avatar");
             String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
             
@@ -102,7 +100,6 @@ public class edit extends HttpServlet {
                 Files.createDirectory(Paths.get(realPath));
             }
             
-            System.out.println(realPath);
             part.write(realPath + "/" + fileName);
             
             ud.updateAvatar(u.getUserid(), fileName);

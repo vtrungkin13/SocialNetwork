@@ -206,19 +206,19 @@
               <img id="icon-user" class="mb-1 h-6 w-6 cursor-pointer rounded-full transition sm:h-8 sm:w-8" src="avatar/${sessionScope.user.avatar}" />
             </div>
             <div id="subnav-user" class="absolute top-10 right-0 h-48 w-48 rounded-lg bg-white text-xl shadow-sm shadow-gray-600" style="visibility: hidden;" >
-              <div class="flex cursor-pointer items-center pl-5 pt-1 pb-2 hover:rounded-lg hover:bg-gray-200">
+              <div class="flex cursor-pointer items-center pl-5 pt-1 pb-2 hover:rounded-lg hover:bg-gray-100">
                 <i class=" ri-map-pin-user-line mr-3 text-emerald-400 text-3xl"></i>
                 <a href="profile" class="text-emerald-400">Profile</a>
               </div>
-              <div class="flex cursor-pointer items-center pl-5 pt-1 pb-2 hover:rounded-lg hover:bg-gray-200">
+              <div class="flex cursor-pointer items-center pl-5 pt-1 pb-2 hover:rounded-lg hover:bg-gray-100">
                 <i class=" ri-bookmark-line mr-3 text-emerald-400 text-3xl"></i>
                 <a href="#" class="text-emerald-400">Save</a>
               </div>
-              <div class="flex cursor-pointer items-center pl-5 pt-1 pb-2 hover:rounded-lg hover:bg-gray-200">
+              <div class="flex cursor-pointer items-center pl-5 pt-1 pb-2 hover:rounded-lg hover:bg-gray-100">
                 <i class=" ri-settings-5-line mr-3 text-emerald-400 text-3xl"></i>
                 <a href="edit" class="text-emerald-400">Settings</a>
               </div>
-              <div class="flex h-12 cursor-pointer items-center pl-14 pt-1 pb-2 font-bold hover:rounded-lg hover:bg-gray-200">
+              <div class="flex h-12 cursor-pointer items-center pl-14 pt-1 pb-2 font-bold hover:rounded-lg hover:bg-gray-100">
                 <a href="logout" class="text-emerald-500">Log out</a>
               </div>
             </div>
@@ -282,7 +282,7 @@
     </div>
 
     <!-- Container -->
-    <div class="pt-12 sm:bg-cyan-50 sm:pt-14">
+    <div class="pt-12 sm:bg-gray-50 sm:pt-14">
       <div class="mx-auto flex w-full flex-col md:w-3/5 xl:w-2/5">
         <!-- Story  -->
         <div class="flex justify-start overflow-x-hidden bg-white p-1 sm:rounded-md sm:border sm:border-gray-300 sm:p-2">
