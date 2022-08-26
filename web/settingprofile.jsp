@@ -196,7 +196,7 @@
                         <p class="mt-5">Date of Birth</p>
                         <p class="mt-5">Gender</p>
                     </div>
-                    <form action="edit" method="post">
+                    <form action="edit" method="post" enctype="multipart/form-data">
                         <div class="flex flex-col items-start">
                             <p class="font-bold text-lg">${sessionScope.user.name}</p>
                             <div class="text-blue-500 font-bold cursor-pointer mb-2">

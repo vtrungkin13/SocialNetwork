@@ -9,11 +9,16 @@ import dal.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 import model.User;
 
@@ -21,6 +26,7 @@ import model.User;
  *
  * @author vtrun
  */
+@MultipartConfig
 @WebServlet(name="edit", urlPatterns={"/edit"})
 public class edit extends HttpServlet {
    
@@ -77,17 +83,29 @@ public class edit extends HttpServlet {
         String bio = request.getParameter("bio");
         String mail = request.getParameter("mail");
         String phone = request.getParameter("phone");
-        String avatar = request.getParameter("avatar");
         Date dob = Date.valueOf(request.getParameter("dob"));
         String gender = request.getParameter("gender");
+        Part part = request.getPart("avatar");
         
         HttpSession session = request.getSession();
         User u = (User) session.getAttribute("user");
         userDAO ud = new userDAO();
         ud.updateUser(u.getUserid(), username, name, mail, bio, phone, gender.equals("Male"), dob);
         
-        if (!avatar.equals("")) {
-            ud.updateAvatar(u.getUserid(), avatar);
+        if(part.getSize() > 0){
+            
+            
+            String realPath = request.getServletContext().getRealPath("/avatar");
+            String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+            
+            if (!Files.exists(Paths.get(realPath))) {
+                Files.createDirectory(Paths.get(realPath));
+            }
+            
+            System.out.println(realPath);
+            part.write(realPath + "/" + fileName);
+            
+            ud.updateAvatar(u.getUserid(), fileName);
         }
         
         response.sendRedirect("edit");
