@@ -187,24 +187,30 @@
         </div>
 
         <!-- New post  -->
-        <div id="subnav-newpost" class="fixed z-50 h-screen w-screen bg-cyan-100 bg-opacity-80" style="visibility: hidden;" >
-            <div class="mt-20 flex flex-col items-center justify-center">
-                <div class="newpost-item relative w-80 rounded-t-xl border border-gray-300 bg-white sm:w-96">
-                    <p class="flex justify-center p-1 text-xl font-bold sm:p-2 text-emerald-500">Create New Post</p>
-                    <span id="newpost-close" class="absolute top-0 right-2 cursor-pointer">x</span>
-                </div>
-                <div class="newpost-item relative">
-                    <form class="h-80 w-80 border border-gray-300 sm:h-96 sm:w-96 bg-white flex justify-center" action="">
-                        <img id="image-preview" class=" border-t-none h-64 w-64 border border-gray-300 sm:h-80 sm:w-80" src="http://www.arteoral.com.br/wp-content/uploads/2016/04/dummy-post-square-1-768x768.jpg" alt="" />
-                    </form>
-                    <input id="image-input" class="absolute top-72 right-0 cursor-pointer sm:top-80 sm:mt-4 sm:right-0" type="file" />
-                </div>
-                <form class="newpost-item relative border border-gray-300 bg-white pb-12" action="">
-                    <textarea class="w-80 p-4 sm:w-96" name="" id="" cols="" rows="4" placeholder="What's in your mine?"></textarea>
-                    <button class="absolute bottom-4 right-32 rounded-lg border border-gray-300 bg-emerald-400 hover:bg-emerald-500 py-1 px-4  sm:right-40">Post</button>
-                </form>
+      <div id="subnav-newpost" class="fixed z-50 h-screen w-screen bg-emerald-100 bg-opacity-80" style="visibility: hidden;" >
+        <div class="mt-20 flex flex-col items-center justify-center">
+          <div class="newpost-item relative w-80 rounded-t-xl  bg-white sm:w-96">
+            <p class="flex justify-center p-1 text-xl font-bold sm:p-2 text-emerald-500">Create New Post</p>
+            <span id="newpost-close" class="absolute top-0 right-2 cursor-pointer font-bold text-xl">x</span>
+          </div>
+          <div class="newpost-item relative">
+            <form class="h-80 w-80  sm:h-96 sm:w-96 bg-white flex justify-center relative" action="">
+              <img id="image-preview" class=" border-t-none h-80 sm:h-96" src="http://www.arteoral.com.br/wp-content/uploads/2016/04/dummy-post-square-1-768x768.jpg" alt="" />
+              <i id="image-undo" class="absolute top-2 right-2 text-3xl font-bold cursor-pointer ri-arrow-left-circle-line" style="display: none;"></i>
+            </form>
+            <label id="image-input-view" class="absolute top-56 right-28 cursor-pointer sm:top-64 sm:mt-4 sm:right-36 py-1 px-2 bg-emerald-300 hover:bg-emerald-400 rounded-xl" for="image-input">Add photo</label>
+            <input id="image-input" class="hidden" type="file" />
+          </div>
+          <form class="px-6 py-4 w-80 sm:w-96 newpost-item relative bg-white rounded-b-xl" action="">
+            <div class="flex justify-start items-center">
+              <img class="w-7 h-7 rounded-full" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="avt">
+              <p class="ml-2 text-sm font-bold">tungba103</p>
             </div>
+            <textarea class="mt-2 sm:w-68 w-80 text-sm focus:outline-none" name="" id="" cols="" rows="4" placeholder="Write a caption..."></textarea>
+            <button class="rounded-lg w-16 bg-emerald-400 hover:bg-emerald-500 ">Post</button>
+          </form>
         </div>
+      </div>
 
         <!-- Container -->
         <div class="pt-12 sm:bg-gray-50 sm:pt-14">
@@ -306,223 +312,233 @@
         </div>
     </body>
     <script>
-        // Friend
-        var iconFriendHandler = document.getElementById("icon-friend");
-        var subnavFriendHandler = document.getElementById("subnav-friend");
+      // Friend
+      var iconFriendHandler = document.getElementById("icon-friend");
+      var subnavFriendHandler = document.getElementById("subnav-friend");
 
-        // Notification
-        var iconNotifHandler = document.getElementById("icon-notif");
-        var subnavNotifHandler = document.getElementById("subnav-notif");
+      // Notification
+      var iconNotifHandler = document.getElementById("icon-notif");
+      var subnavNotifHandler = document.getElementById("subnav-notif");
 
-        // User
-        var iconUserHandler = document.getElementById("icon-user");
-        var subnavUserHandler = document.getElementById("subnav-user");
+      // User
+      var iconUserHandler = document.getElementById("icon-user");
+      var subnavUserHandler = document.getElementById("subnav-user");
 
-        // NewPost
-        var iconNewpostHandler = document.getElementById("icon-newpost");
-        var newpostHandler = document.getElementById("subnav-newpost");
-        var newpostCloseHandler = document.getElementById("newpost-close");
-        var newpostItemHandler = document.getElementsByClassName("newpost-item");
-        var imagePreview = document.getElementById("image-preview")
-        var imageInput = document.getElementById("image-input")
+      // NewPost
+      var iconNewpostHandler = document.getElementById("icon-newpost");
+      var newpostHandler = document.getElementById("subnav-newpost");
+      var newpostCloseHandler = document.getElementById("newpost-close");
+      var newpostItemHandler = document.getElementsByClassName("newpost-item");
+      var imagePreview = document.getElementById("image-preview")
+      var imageInput = document.getElementById("image-input")
+      var imageInputView = document.getElementById("image-input-view")
+      var imageUndo = document.getElementById("image-undo")
 
-        // Like + Save
-        var heartIconHandler = document.getElementsByClassName("heart-icon")
-        var heartFillIconHandler = document.getElementsByClassName("heart-fill-icon")
-        var saveIconHandler = document.getElementsByClassName("save-icon")
-        var saveFillIconHandler = document.getElementsByClassName("save-fill-icon")
+      // Like + Save
+      var heartIconHandler = document.getElementsByClassName("heart-icon")
+      var heartFillIconHandler = document.getElementsByClassName("heart-fill-icon")
+      var saveIconHandler = document.getElementsByClassName("save-icon")
+      var saveFillIconHandler = document.getElementsByClassName("save-fill-icon")
 
-        // Search
-        var subnavSearchHandler = document.getElementById("subnav-search")
-        var searchInputHandler = document.getElementById("search-input")
-        var searchItemHandler = document.getElementsByClassName("search-item")
-        var itemUserHandler = document.getElementsByClassName("item-user")
-        // Search mobile
-        var iconSearchHandler = document.getElementById("icon-search")
-        var mobileSearchHandler = document.getElementById("mobile-search")
-        var mobileSearchContainerHandler = document.getElementById("mobile-search-container")
-        var mobileSubnavSearchHandler = document.getElementById("mobile-subnav-search")
-        var mobileSearchInputHandler = document.getElementById("mobile-search-input")
-        var mobileSearchItemHandler = document.getElementsByClassName("mobile-search-item")
-        var mobileItemUserHandler = document.getElementsByClassName("mobile-item-user")
-
-
-        // Search Handler 
-        searchInputHandler.addEventListener("input", function () {
-            subnavSearchHandler.style.visibility = "visible";
-        })
-
-        document.addEventListener("click", function (e) {
-            if (!subnavSearchHandler.contains(e.target) && !searchInputHandler.contains(e.target)) {
-                subnavSearchHandler.style.visibility = "hidden";
-                for (var i = 0; i < itemUserHandler.length; i++) {
-                    searchItemHandler[i].style.display = "none";
-                }
-            }
-        })
-
-        var temp = "-1";
-        searchInputHandler.addEventListener("input", function (e) {
-            if (e.target.value != temp) {
-                for (var i = 0; i < itemUserHandler.length; i++) {
-                    searchItemHandler[i].style.display = "none";
-                }
-                temp = e.target.value;
-            }
-            if (e.target.value != "") {
-                for (var i = 0; i < itemUserHandler.length; i++) {
-                    if (itemUserHandler[i].innerHTML.toLowerCase().includes(e.target.value.toLowerCase())) {
-                        subnavSearchHandler.style.visibility = "visible";
-                        searchItemHandler[i].style.display = "flex";
-                    }
-                }
-            } else {
-                subnavSearchHandler.style.visibility = "hidden"
-                for (var i = 0; i < itemUserHandler.length; i++) {
-                    searchItemHandler[i].style.display = "none";
-                }
-            }
-        })
-
-        // Search Mobile 
-        iconSearchHandler.addEventListener("click", function () {
-            mobileSearchHandler.style.visibility = "visible";
-        })
-        document.addEventListener("click", function (e) {
-            if (!mobileSearchContainerHandler.contains(e.target) && !iconSearchHandler.contains(e.target)) {
-                mobileSubnavSearchHandler.style.visibility = "hidden";
-                mobileSearchHandler.style.visibility = "hidden";
-            }
-        })
-        // Search Mobile input handle
-
-        var mobileTemp = "-1";
-        mobileSearchInputHandler.addEventListener("input", function (e) {
-            if (e.target.value != mobileTemp) {
-                for (var i = 0; i < mobileItemUserHandler.length; i++) {
-                    mobileSearchItemHandler[i].style.display = "none";
-                }
-                mobileTemp = e.target.value;
-            }
-            if (e.target.value != "") {
-                for (var i = 0; i < mobileItemUserHandler.length; i++) {
-                    if (mobileItemUserHandler[i].innerHTML.toLowerCase().includes(e.target.value.toLowerCase())) {
-                        mobileSubnavSearchHandler.style.visibility = "visible";
-                        mobileSearchItemHandler[i].style.display = "flex";
-                        console.log(mobileSearchItemHandler[i]);
-                    }
-                }
-            } else {
-                mobileSubnavSearchHandler.style.visibility = "hidden"
-                for (var i = 0; i < mobileItemUserHandler.length; i++) {
-                    mobileSearchItemHandler[i].style.display = "none";
-                }
-            }
-        })
+      // Search
+      var subnavSearchHandler = document.getElementById("subnav-search")
+      var searchInputHandler = document.getElementById("search-input")
+      var searchItemHandler = document.getElementsByClassName("search-item")
+      var itemUserHandler = document.getElementsByClassName("item-user")
+      // Search mobile
+      var iconSearchHandler = document.getElementById("icon-search")
+      var mobileSearchHandler = document.getElementById("mobile-search")
+      var mobileSearchContainerHandler = document.getElementById("mobile-search-container")
+      var mobileSubnavSearchHandler = document.getElementById("mobile-subnav-search")
+      var mobileSearchInputHandler = document.getElementById("mobile-search-input")
+      var mobileSearchItemHandler = document.getElementsByClassName("mobile-search-item")
+      var mobileItemUserHandler = document.getElementsByClassName("mobile-item-user")
 
 
+      // Search Handler 
+      searchInputHandler.addEventListener("input", function () {
+          subnavSearchHandler.style.visibility = "visible";
+      })
 
-        // Subnav Friend Handler
-        iconFriendHandler.addEventListener("click", function () {
-            subnavFriendHandler.style.visibility = "visible";
-        })
-        document.addEventListener("click", function (e) {
-            if (!subnavFriendHandler.contains(e.target) && !iconFriendHandler.contains(e.target)) {
-                subnavFriendHandler.style.visibility = "hidden";
-            }
-        })
+      document.addEventListener("click", function (e) {
+          if (!subnavSearchHandler.contains(e.target) && !searchInputHandler.contains(e.target)) {
+              subnavSearchHandler.style.visibility = "hidden";
+              for (var i = 0; i < itemUserHandler.length; i++) {
+                  searchItemHandler[i].style.display = "none";
+              }
+          }
+      })
 
-        // Subnav Notification Handler
-        iconNotifHandler.addEventListener("click", function () {
-            subnavNotifHandler.style.visibility = "visible";
-        })
-        document.addEventListener("click", function (e) {
-            if (!subnavNotifHandler.contains(e.target) && !iconNotifHandler.contains(e.target)) {
-                subnavNotifHandler.style.visibility = "hidden";
-            }
-        })
-        // Subnav User Handler
-        iconUserHandler.addEventListener("click", function () {
-            subnavUserHandler.style.visibility = "visible";
-        })
-        document.addEventListener("click", function (e) {
-            if (!subnavUserHandler.contains(e.target) && !iconUserHandler.contains(e.target)) {
-                subnavUserHandler.style.visibility = "hidden";
-            }
-        })
+      var temp = "-1";
+      searchInputHandler.addEventListener("input", function (e) {
+          if (e.target.value != temp) {
+              for (var i = 0; i < itemUserHandler.length; i++) {
+                  searchItemHandler[i].style.display = "none";
+              }
+              temp = e.target.value;
+          }
+          if (e.target.value != "") {
+              for (var i = 0; i < itemUserHandler.length; i++) {
+                  if (itemUserHandler[i].innerHTML.toLowerCase().includes(e.target.value.toLowerCase())) {
+                      subnavSearchHandler.style.visibility = "visible";
+                      searchItemHandler[i].style.display = "flex";
+                  }
+              }
+          } else {
+              subnavSearchHandler.style.visibility = "hidden"
+              for (var i = 0; i < itemUserHandler.length; i++) {
+                  searchItemHandler[i].style.display = "none";
+              }
+          }
+      })
 
-        // Heart & Save Iteraction
-        // Heart
-        for (let i = 0; i < heartIconHandler.length; i++) {
-            if (i != null) {
-                heartIconHandler[i].addEventListener("click", function () {
-                    heartIconHandler[i].style.display = "none";
-                    heartFillIconHandler[i].style.display = "block";
-                })
-            }
-        }
+      // Search Mobile 
+      iconSearchHandler.addEventListener("click", function () {
+          mobileSearchHandler.style.visibility = "visible";
+      })
+      document.addEventListener("click", function (e) {
+          if (!mobileSearchContainerHandler.contains(e.target) && !iconSearchHandler.contains(e.target)) {
+              mobileSubnavSearchHandler.style.visibility = "hidden";
+              mobileSearchHandler.style.visibility = "hidden";
+          }
+      })
+      // Search Mobile input handle
 
-        for (let i = 0; i < heartFillIconHandler.length; i++) {
-            if (i != null) {
-                heartFillIconHandler[i].addEventListener("click", function () {
-                    heartFillIconHandler[i].style.display = "none";
-                    heartIconHandler[i].style.display = "block";
-                })
-            }
-        }
-        // Save
-        for (let i = 0; i < saveIconHandler.length; i++) {
-            if (i != null) {
-                saveIconHandler[i].addEventListener("click", function () {
-                    saveIconHandler[i].style.display = "none";
-                    saveFillIconHandler[i].style.display = "block";
-                })
-            }
-        }
-
-        for (let i = 0; i < saveFillIconHandler.length; i++) {
-            if (i != null) {
-                saveFillIconHandler[i].addEventListener("click", function () {
-                    saveFillIconHandler[i].style.display = "none";
-                    saveIconHandler[i].style.display = "block";
-                })
-            }
-        }
-        // New post handler
-        iconNewpostHandler.addEventListener("click", function () {
-            newpostHandler.style.visibility = "visible";
-        })
-        document.addEventListener("click", function (e) {
-            var temp = false;
-            for (item of newpostItemHandler) {
-                if (item.contains(e.target))
-                    temp = true;
-            }
-            if (!temp && !iconNewpostHandler.contains(e.target)) {
-                newpostHandler.style.visibility = "hidden";
-            }
-        })
-        newpostCloseHandler.addEventListener("click", function () {
-            newpostHandler.style.visibility = "hidden";
-        })
-
-        // New post Image Handler
-        imageInput.addEventListener("change", function () {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-
-                reader.addEventListener("load", function () {
-                    console.log(this)
-                    imagePreview.setAttribute("src", this.result);
-                })
-
-                reader.readAsDataURL(file);
-
-            }
-        })
+      var mobileTemp = "-1";
+      mobileSearchInputHandler.addEventListener("input", function (e) {
+          if (e.target.value != mobileTemp) {
+              for (var i = 0; i < mobileItemUserHandler.length; i++) {
+                  mobileSearchItemHandler[i].style.display = "none";
+              }
+              mobileTemp = e.target.value;
+          }
+          if (e.target.value != "") {
+              for (var i = 0; i < mobileItemUserHandler.length; i++) {
+                  if (mobileItemUserHandler[i].innerHTML.toLowerCase().includes(e.target.value.toLowerCase())) {
+                      mobileSubnavSearchHandler.style.visibility = "visible";
+                      mobileSearchItemHandler[i].style.display = "flex";
+                      console.log(mobileSearchItemHandler[i]);
+                  }
+              }
+          } else {
+              mobileSubnavSearchHandler.style.visibility = "hidden"
+              for (var i = 0; i < mobileItemUserHandler.length; i++) {
+                  mobileSearchItemHandler[i].style.display = "none";
+              }
+          }
+      })
 
 
-    </script>
+
+      // Subnav Friend Handler
+      iconFriendHandler.addEventListener("click", function () {
+          subnavFriendHandler.style.visibility = "visible";
+      })
+      document.addEventListener("click", function (e) {
+          if (!subnavFriendHandler.contains(e.target) && !iconFriendHandler.contains(e.target)) {
+              subnavFriendHandler.style.visibility = "hidden";
+          }
+      })
+
+      // Subnav Notification Handler
+      iconNotifHandler.addEventListener("click", function () {
+          subnavNotifHandler.style.visibility = "visible";
+      })
+      document.addEventListener("click", function (e) {
+          if (!subnavNotifHandler.contains(e.target) && !iconNotifHandler.contains(e.target)) {
+              subnavNotifHandler.style.visibility = "hidden";
+          }
+      })
+      // Subnav User Handler
+      iconUserHandler.addEventListener("click", function () {
+          subnavUserHandler.style.visibility = "visible";
+      })
+      document.addEventListener("click", function (e) {
+          if (!subnavUserHandler.contains(e.target) && !iconUserHandler.contains(e.target)) {
+              subnavUserHandler.style.visibility = "hidden";
+          }
+      })
+
+      // Heart & Save Iteraction
+      // Heart
+      for (let i = 0; i < heartIconHandler.length; i++) {
+          if (i != null) {
+              heartIconHandler[i].addEventListener("click", function () {
+                  heartIconHandler[i].style.display = "none";
+                  heartFillIconHandler[i].style.display = "block";
+              })
+          }
+      }
+
+      for (let i = 0; i < heartFillIconHandler.length; i++) {
+          if (i != null) {
+              heartFillIconHandler[i].addEventListener("click", function () {
+                  heartFillIconHandler[i].style.display = "none";
+                  heartIconHandler[i].style.display = "block";
+              })
+          }
+      }
+      // Save
+      for (let i = 0; i < saveIconHandler.length; i++) {
+          if (i != null) {
+              saveIconHandler[i].addEventListener("click", function () {
+                  saveIconHandler[i].style.display = "none";
+                  saveFillIconHandler[i].style.display = "block";
+              })
+          }
+      }
+
+      for (let i = 0; i < saveFillIconHandler.length; i++) {
+          if (i != null) {
+              saveFillIconHandler[i].addEventListener("click", function () {
+                  saveFillIconHandler[i].style.display = "none";
+                  saveIconHandler[i].style.display = "block";
+              })
+          }
+      }
+      // New post handler
+      iconNewpostHandler.addEventListener("click", function () {
+          newpostHandler.style.visibility = "visible";
+      })
+      document.addEventListener("click", function (e) {
+          var temp = false;
+          for (item of newpostItemHandler) {
+              if (item.contains(e.target))
+                  temp = true;
+          }
+          if (!temp && !iconNewpostHandler.contains(e.target)) {
+              newpostHandler.style.visibility = "hidden";
+          }
+      })
+      newpostCloseHandler.addEventListener("click", function () {
+          newpostHandler.style.visibility = "hidden";
+      })
+
+      // New post Image Handler
+      imageInput.addEventListener("change", function () {
+          imageInputView.style.display = "none";
+          imageUndo.style.display = "block";
+          const file = this.files[0];
+          if (file) {
+              const reader = new FileReader();
+
+              reader.addEventListener("load", function () {
+                  console.log(this)
+                  imagePreview.setAttribute("src", this.result);
+              })
+
+              reader.readAsDataURL(file);
+
+          }
+      })
+
+      imageUndo.addEventListener("click",function() {
+        imageUndo.style.display = "none";
+        imageInputView.style.display = "block";
+        imagePreview.setAttribute("src","http://www.arteoral.com.br/wp-content/uploads/2016/04/dummy-post-square-1-768x768.jpg")
+      })
+
+
+  </script>
 </html>
 
