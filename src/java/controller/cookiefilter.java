@@ -20,13 +20,15 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import model.User;
 
 /**
  *
  * @author vtrun
  */
-@WebFilter(filterName = "cookiefilter", urlPatterns = {"/index.jsp", "/home", "/profile", "/edit", "/changepassword"})
+@WebFilter(filterName = "cookiefilter", urlPatterns = 
+        {"/index.jsp", "/home", "/profile", "/edit", "/changepassword"})
 public class cookiefilter implements Filter {
     
     private static final boolean debug = true;
@@ -130,6 +132,9 @@ public class cookiefilter implements Filter {
                 userDAO ud = new userDAO();
                 User u = ud.getUserByUserid(userid);
                 session.setAttribute("user", u);
+                
+                List<User> users = ud.getUsersSearch(u.getUserid());
+                session.setAttribute("search", users);
             } else {
                 resp.sendRedirect("signin");
             }

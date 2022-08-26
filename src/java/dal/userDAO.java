@@ -21,7 +21,7 @@ import model.User;
  * @author tungb
  */
 public class userDAO extends DBContext {
-    
+
     public List<User> getUsers() {
         List<User> users = new ArrayList<>();
         String sql = "select * from [user];";
@@ -43,11 +43,11 @@ public class userDAO extends DBContext {
                 users.add(u);
             }
         } catch (SQLException e) {
-            
+
         }
         return users;
     }
-    
+
     public void addUser(User u) {
         String sql = "insert into [user] ([username], [password], [name], [avatar], [gender], [dob], [userid])"
                 + " values(?, ?, ?, ?, ?, ?, ?)";
@@ -64,10 +64,10 @@ public class userDAO extends DBContext {
             ps.setLong(7, ++size);
             ps.executeUpdate();
         } catch (SQLException e) {
-            
+
         }
     }
-    
+
     public void deleteUser(long userid) {
         String sql = "delete from [user] where [userid] = ?";
         try {
@@ -75,10 +75,10 @@ public class userDAO extends DBContext {
             ps.setLong(1, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
-            
+
         }
     }
-    
+
     public void updateUser(long userid, String username, String name, String mail, String bio, String phone, boolean gender, Date dob) {
         String sql = "update [user] set [username] = ?, [name] = ?, [bio] = ?, [mail] = ?, "
                 + "[phone] = ?, [gender] = ?, [dob] = ? where [userid] = ?";
@@ -94,10 +94,10 @@ public class userDAO extends DBContext {
             ps.setLong(8, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
-            
+
         }
     }
-    
+
     public void updateUsername(long userid, String username) {
         String sql = "update [user] set [username] = ? where [userid] = ?";
         try {
@@ -106,10 +106,10 @@ public class userDAO extends DBContext {
             ps.setLong(2, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
-            
+
         }
     }
-    
+
     public void updateName(long userid, String name) {
         String sql = "update [user] set [name] = ? where [userid] = ?";
         try {
@@ -118,10 +118,10 @@ public class userDAO extends DBContext {
             ps.setLong(2, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
-            
+
         }
     }
-    
+
     public void updateMail(long userid, String mail) {
         String sql = "update [user] set [mail] = ? where [userid] = ?";
         try {
@@ -130,10 +130,10 @@ public class userDAO extends DBContext {
             ps.setLong(2, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
-            
+
         }
     }
-    
+
     public void updatePhone(long userid, String phone) {
         String sql = "update [user] set [phone] = ? where [userid] = ?";
         try {
@@ -142,10 +142,10 @@ public class userDAO extends DBContext {
             ps.setLong(2, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
-            
+
         }
     }
-    
+
     public void updateAvatar(long userid, String avatar) {
         String sql = "update [user] set [avatar] = ? where [userid] = ?";
         try {
@@ -154,10 +154,10 @@ public class userDAO extends DBContext {
             ps.setLong(2, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
-            
+
         }
     }
-    
+
     public void updateGender(long userid, boolean gender) {
         String sql = "update [user] set [gender] = ? where [userid] = ?";
         try {
@@ -166,10 +166,10 @@ public class userDAO extends DBContext {
             ps.setLong(2, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
-            
+
         }
     }
-    
+
     public void updateDob(long userid, Date dob) {
         String sql = "update [user] set [dob] = ? where [username] = ?";
         try {
@@ -178,10 +178,10 @@ public class userDAO extends DBContext {
             ps.setLong(2, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
-            
+
         }
     }
-    
+
     public void updatePassword(long userid, String password) {
         String sql = "update [user] set [password] = ? where [userid] = ?";
         try {
@@ -190,10 +190,10 @@ public class userDAO extends DBContext {
             ps.setLong(2, userid);
             ps.executeUpdate();
         } catch (SQLException e) {
-            
+
         }
     }
-    
+
     public User getUserByUserid(long userid) {
         String sql = "select * from [user] where [userid] = ?";
         try {
@@ -214,11 +214,11 @@ public class userDAO extends DBContext {
                         rs.getLong(10));
             }
         } catch (SQLException e) {
-            
+
         }
         return null;
     }
-    
+
     public User getUserByUsername(String username) {
         String sql = "select * from [user] where [username] = ?";
         try {
@@ -239,11 +239,11 @@ public class userDAO extends DBContext {
                         rs.getLong(10));
             }
         } catch (SQLException e) {
-            
+
         }
         return null;
     }
-    
+
     public User getUserByUsernameAndPassword(String username, String password) {
         String sql = "select * from [user] where [username] = ? and [password] = ?";
         try {
@@ -251,7 +251,7 @@ public class userDAO extends DBContext {
             ps.setString(1, username);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()) {
+            if (rs.next()) {
                 return new User(
                         rs.getString(1),
                         rs.getString(2),
@@ -264,9 +264,31 @@ public class userDAO extends DBContext {
                         rs.getDate(9),
                         rs.getLong(10));
             }
-        } catch(SQLException e) {
-            
+        } catch (SQLException e) {
+
         }
         return null;
+    }
+
+    public List<User> getUsersSearch(long userid) {
+        String sql = "select u.[username], u.[name] from [user] u join [friend] f on u.Userid = f.friend\n"
+                + "where f.[user] = ?\n"
+                + "union\n"
+                + "select [username], [name] from [user]";
+        List<User> users = new ArrayList();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setLong(1, userid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User();
+                u.setUsername(rs.getString(1));
+                u.setName(rs.getString(2));
+                users.add(u);
+            }
+        } catch (SQLException e) {
+            
+        }
+        return users;
     }
 }

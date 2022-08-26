@@ -11,7 +11,7 @@ package model;
 public class PostInteraction {
     private User user;
     private Post post;
-    private int emotion = 0;
+    private boolean emotion = false;
     private String comment = "null";
     private boolean share = false;
 
@@ -39,11 +39,11 @@ public class PostInteraction {
         this.post = post;
     }
 
-    public int getEmotion() {
+    public boolean getEmotion() {
         return emotion;
     }
 
-    public void setEmotion(int emotion) {
+    public void setEmotion(boolean emotion) {
         this.emotion = emotion;
     }
 
