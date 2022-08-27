@@ -224,7 +224,7 @@
                         <li class="px-2 sm:px-4 cursor-pointer py-4  hover:bg-gray-100">Help</li>
                     </ul>
                 </div>
-                <form class="text-sm sm:text-base p-4 sm:pl-10">
+                <form class="text-sm sm:text-base p-4 sm:pl-10" action="" method="post">
                         <div class="w-full flex items-center py-2 sm:py-3">
                             <img id="profile-image" class="w-14 h-14 rounded-full" src="avatar/${sessionScope.user.avatar}" alt="" />
                             <div class="ml-4 ">
