@@ -12,7 +12,7 @@ import java.sql.Time;
  * @author tungb
  */
 public class Post {
-    private int postId;
+    private long postId;
     private Date date;
     private Time time;
     private String content;
@@ -20,9 +20,11 @@ public class Post {
     private User user;
 
     public Post() {
+        this.content = null;
+        this.attachment = null;
     }
 
-    public Post(int postId, Date date, Time time, String content, String attachment, User user) {
+    public Post(long postId, Date date, Time time, String content, String attachment, User user) {
         this.postId = postId;
         this.date = date;
         this.time = time;
@@ -31,11 +33,11 @@ public class Post {
         this.user = user;
     }
 
-    public int getPostId() {
+    public long getPostId() {
         return postId;
     }
 
-    public void setPostId(int postId) {
+    public void setPostId(long postId) {
         this.postId = postId;
     }
 
