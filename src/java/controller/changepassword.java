@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
@@ -71,6 +74,21 @@ public class changepassword extends HttpServlet {
         String password = request.getParameter("pass");
         String newpassword = request.getParameter("newpass");
         String renewpassword = request.getParameter("renewpass");
+        
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("user");
+        
+        if (!password.equals(u.getPassword())) {
+            
+        } else {
+            if (!newpassword.equals(renewpassword)) {
+                
+            } else {
+                userDAO ud = new userDAO();
+                ud.updatePassword(u.getUserid(), newpassword);
+            }
+        }
+        request.getRequestDispatcher("settingpassword.jsp").forward(request, response);
     }
 
     /** 
