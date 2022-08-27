@@ -183,7 +183,7 @@
   
       <!-- New post  -->
       <div id="subnav-newpost" class="fixed z-50 h-screen w-screen bg-emerald-100 bg-opacity-80" style="visibility: hidden;" >
-        <div class="mt-20 flex flex-col items-center justify-center">
+        <div class="mt-8 xl:mt-1 2xl:mt-20 flex flex-col items-center justify-center">
           <div class="newpost-item relative w-80 rounded-t-xl  bg-white sm:w-96">
             <p class="flex justify-center p-1 text-xl font-bold sm:p-2 text-emerald-500">Create New Post</p>
             <span id="newpost-close" class="absolute top-0 right-2 cursor-pointer font-bold text-xl">x</span>
@@ -198,8 +198,8 @@
           </div>
           <form class="px-6 py-4 w-80 sm:w-96 newpost-item relative bg-white rounded-b-xl" action="">
             <div class="flex justify-start items-center">
-              <img class="w-7 h-7 rounded-full" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="avt">
-              <p class="ml-2 text-sm font-bold">tungba103</p>
+              <img class="w-7 h-7 rounded-full" src="avatar/${sessionScope.user.avatar}" alt="avt">
+              <p class="ml-2 text-sm font-bold">${sessionScope.user.username}</p>
             </div>
             <textarea class="mt-2 sm:w-68 w-80 text-sm focus:outline-none" name="" id="" cols="" rows="4" placeholder="Write a caption..."></textarea>
             <button class="rounded-lg w-16 bg-emerald-400 hover:bg-emerald-500 ">Post</button>
@@ -212,7 +212,7 @@
             <div class="relative flex justify-start 2xl:mx-96 xl:mx-72 bg-white rounded-xl sm:border border-gray-200 sm:shadow-md">
                 <div class="w-28 sm:min-w-fit text-sm sm:text-base">
                     <ul class="">
-                        <li class="font-bold px-2 sm:px-4 cursor-pointer py-4 ">Edit Profile</li>
+                        <li class="font-bold px-2 sm:px-4 cursor-pointer py-4 "><a href="edit">Edit Profile</a></li>
                         <li class="px-2 sm:px-4 cursor-pointer py-4  hover:bg-gray-100"><a href="changepassword">Change password</a></li>
                         <li class="px-2 sm:px-4 cursor-pointer py-4  hover:bg-gray-100">Apps and websites</li>
                         <li class="px-2 sm:px-4 cursor-pointer py-4  hover:bg-gray-100">Email notifications</li>
@@ -286,7 +286,7 @@
                         </div>
                         <div class="flex justify-center items-center mt-10 sm:mt-4">
                             <button class=" px-3 py-1 font-bold bg-emerald-400 opacity-90 hover:opacity-100 rounded-xl">
-                                Post
+                                Submit
                             </button>
                         </div>
                     </form>

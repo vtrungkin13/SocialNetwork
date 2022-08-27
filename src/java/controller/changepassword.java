@@ -79,10 +79,10 @@ public class changepassword extends HttpServlet {
         User u = (User) session.getAttribute("user");
         
         if (!password.equals(u.getPassword())) {
-            
+            request.setAttribute("passwordIncorrect", "Your old password was entered incorrectly");
         } else {
             if (!newpassword.equals(renewpassword)) {
-                
+                request.setAttribute("passwordNotMatch", "Please make sure both passwords match");
             } else {
                 userDAO ud = new userDAO();
                 ud.updatePassword(u.getUserid(), newpassword);

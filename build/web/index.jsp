@@ -188,7 +188,7 @@
 
         <!-- New post  -->
       <div id="subnav-newpost" class="fixed z-50 h-screen w-screen bg-emerald-100 bg-opacity-80" style="visibility: hidden;" >
-        <div class="mt-20 flex flex-col items-center justify-center">
+        <div class="mt-8 xl:mt-1 2xl:mt-20 flex flex-col items-center justify-center">
           <div class="newpost-item relative w-80 rounded-t-xl  bg-white sm:w-96">
             <p class="flex justify-center p-1 text-xl font-bold sm:p-2 text-emerald-500">Create New Post</p>
             <span id="newpost-close" class="absolute top-0 right-2 cursor-pointer font-bold text-xl">x</span>
@@ -203,8 +203,8 @@
           </div>
           <form class="px-6 py-4 w-80 sm:w-96 newpost-item relative bg-white rounded-b-xl" action="">
             <div class="flex justify-start items-center">
-              <img class="w-7 h-7 rounded-full" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="avt">
-              <p class="ml-2 text-sm font-bold">tungba103</p>
+                <img class="w-7 h-7 rounded-full" src="avatar/${sessionScope.user.avatar}" alt="avt">
+                <p class="ml-2 text-sm font-bold">${sessionScope.user.username}</p>
             </div>
             <textarea class="mt-2 sm:w-68 w-80 text-sm focus:outline-none" name="" id="" cols="" rows="4" placeholder="Write a caption..."></textarea>
             <button class="rounded-lg w-16 bg-emerald-400 hover:bg-emerald-500 ">Post</button>
@@ -218,19 +218,19 @@
                 <!-- Story  -->
                 <div class="flex justify-start overflow-x-hidden bg-white p-1 sm:rounded-md sm:border sm:border-gray-300 sm:p-2">
                     <div class="mr-2 min-w-fit">
-                        <div class="icon-story cursor-pointer rounded-full bg-gradient-to-bl from-emerald-500 to-emerald-300 p-0.5 shadow-sm shadow-gray-400 ">
+                        <div class="icon-story cursor-pointer rounded-full bg-gradient-to-tr from-cyan-400 via-emerald-400 to-lime-400 p-0.5 shadow-sm shadow-gray-400 ">
                             <img class="h-16 w-16 rounded-full bg-white p-0.5 sm:h-16 sm:w-16" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow" />
                         </div>
                         <p class="flex justify-center text-xs sm:text-sm">2022</p>
                     </div>
                     <div class="mr-2 min-w-fit">
-                        <div class="icon-story cursor-pointer rounded-full bg-gradient-to-bl from-emerald-500 to-emerald-300 p-0.5 shadow-sm shadow-gray-400 ">
+                        <div class="icon-story cursor-pointer rounded-full bg-gradient-to-tr from-cyan-400 via-emerald-400 to-lime-400 p-0.5 shadow-sm shadow-gray-400 ">
                             <img class="h-16 w-16 rounded-full bg-white p-0.5 sm:h-16 sm:w-16" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow" />
                         </div>
                         <p class="flex justify-center text-xs sm:text-sm">2022</p>
                     </div>
                     <div class="mr-2 min-w-fit">
-                        <div class="icon-story cursor-pointer rounded-full bg-gradient-to-bl from-emerald-500 to-emerald-300 p-0.5 shadow-sm shadow-gray-400 ">
+                        <div class="icon-story cursor-pointer rounded-full bg-gradient-to-tr from-cyan-400 via-emerald-400 to-lime-400 p-0.5 shadow-sm shadow-gray-400 ">
                             <img class="h-16 w-16 rounded-full bg-white p-0.5 sm:h-16 sm:w-16" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow" />
                         </div>
                         <p class="flex justify-center text-xs sm:text-sm">2022</p>
