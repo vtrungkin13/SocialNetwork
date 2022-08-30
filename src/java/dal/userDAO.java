@@ -267,11 +267,11 @@ public class userDAO extends DBContext {
     }
 
     public List<User> getUsersSearch(long userid) {
-        String sql = "select u.[username], u.[name], u.[avatar], 1 as [order] "
+        String sql = "select u.[username], u.[name], u.[avatar], u.[userid], 1 as [order] "
                 + "from [user] u join [friend] f on u.Userid = f.friend\n"
                 + "where f.[user] = ?\n"
                 + "union\n"
-                + "select [username], [name], [avatar], 2 as[order] from [user] where [username]\n"
+                + "select [username], [name], [avatar], [userid], 2 as[order] from [user] where [username]\n"
                 + "not in (select u.[username] from [user] u join [friend] f on u.Userid = f.friend\n"
                 + "where f.[user] = ?)"
                 + "order by [order]";
@@ -286,6 +286,7 @@ public class userDAO extends DBContext {
                 u.setUsername(rs.getString(1));
                 u.setName(rs.getString(2));
                 u.setAvatar(rs.getString(3));
+                u.setUserid(rs.getLong(4));
                 users.add(u);
             }
         } catch (SQLException e) {

@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.User;
 
 /**
  *
@@ -55,7 +57,11 @@ public class profile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("profile.jsp").forward(request, response);
+        long id = Long.parseLong(request.getParameter("id"));
+        userDAO ud = new userDAO();
+        User u = ud.getUserByUserid(id);
+        request.setAttribute("userSearch", u);
+        request.getRequestDispatcher("profilefriend.jsp").forward(request, response);
     } 
 
     /** 
@@ -68,7 +74,7 @@ public class profile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        request.getRequestDispatcher("profile.jsp").forward(request, response);
     }
 
     /** 

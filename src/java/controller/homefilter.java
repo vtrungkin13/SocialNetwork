@@ -19,6 +19,9 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.Date;
+import java.sql.Time;
+import java.util.Calendar;
 import java.util.List;
 import model.Post;
 import model.User;
@@ -119,6 +122,11 @@ public class homefilter implements Filter {
         
         postDAO pd = new postDAO();
         List<Post> posts = pd.getPostsOrdered(u.getUserid());
+        Date date = new Date(Calendar.getInstance().getTime().getTime());
+        Time time = new Time(Calendar.getInstance().getTime().getTime());
+        
+        req.setAttribute("date", date);
+        req.setAttribute("time", time);
         req.setAttribute("posts", posts);
         req.getRequestDispatcher("index.jsp").forward(req,resp);
         

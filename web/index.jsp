@@ -1,8 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%> 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@page import="jakarta.servlet.http.Cookie"%> 
-<%@page import="model.User"%> 
-<%@page import="dal.userDAO"%>
+<%@page import="java.sql.Date"%>
+<%@page import="java.sql.Time"%>
+<%@page import="java.util.Calendar"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +32,7 @@
                     <input id="search-input" class="w-80 rounded-lg bg-gray-50 p-1 pl-4 text-sm focus:outline-none" type="text" placeholder="Seach..." />
                     <div id="subnav-search" style="visibility: hidden;" class="absolute top-8 w-80 max-h-96 bg-white rounded-xl cursor-pointer overflow-y-scroll">
                         <c:forEach items="${sessionScope.search}" var="s">
-                            <a href="#" style="display:none;" class="search-item flex justify-start items-center p-2 hover:bg-emerald-50 rounded-t-xl">
+                            <a href="profile?id=${s.userid}" style="display:none;" class="search-item flex justify-start items-center p-2 hover:bg-emerald-50 rounded-t-xl">
                                 <img class="w-12 h-12 rounded-full" src="avatar/${s.avatar}" alt="">
                                 <div class="pl-2 text-sm">
                                     <p class="item-user font-bold" >${s.username}</p>
@@ -52,9 +52,9 @@
                         <i class="ri-add-box-line mr-2 text-white sm:mr-4"></i>
                     </i>
                     <div id="icon-friend" class="relative">
-                        <a href="#">
+                        <i class="cursor-pointer">
                             <i class="ri-user-add-fill mr-2 text-2xl text-white sm:mr-4 sm:text-3xl"></i>
-                        </a>
+                        </i>
                         <!-- Friend Subnav  -->
                         <div id="subnav-friend" class="absolute top-10 -right-28 w-80 rounded-md bg-white text-base shadow shadow-gray-400 sm:right-0 sm:w-96" style="visibility:hidden ;">
                             <div class="flex cursor-pointer items-center justify-center p-3 hover:bg-gray-50">
@@ -133,7 +133,9 @@
                         <div id="subnav-user" class="absolute top-10 right-0 h-48 w-48 rounded-lg bg-white text-xl shadow-sm shadow-gray-600" style="visibility: hidden;" >
                             <div class="flex cursor-pointer items-center pl-5 pt-1 pb-2 hover:rounded-lg hover:bg-gray-100">
                                 <i class=" ri-map-pin-user-line mr-3 text-emerald-400 text-3xl"></i>
-                                <a href="profile" class="text-emerald-400">Profile</a>
+                                <form action="profile" method="post">
+                                    <button class="text-emerald-400">Profile</button>
+                                </form>
                             </div>
                             <div class="flex cursor-pointer items-center pl-5 pt-1 pb-2 hover:rounded-lg hover:bg-gray-100">
                                 <i class=" ri-bookmark-line mr-3 text-emerald-400 text-3xl"></i>
@@ -159,27 +161,15 @@
                     <div class="">
                         <input id="mobile-search-input" class="w-80 rounded-lg bg-gray-50 p-1 pl-4 text-sm focus:outline-none" type="text" placeholder="Seach..." />
                         <div id="mobile-subnav-search" style="visibility: hidden;"  class="mt-2 w-80 max-h-96 bg-white rounded-xl cursor-pointer overflow-y-scroll">
-                            <a href="#" style="display: none;" class="mobile-search-item flex justify-start items-center p-2 hover:bg-emerald-50 rounded-t-xl">
-                                <img class="w-12 h-12 rounded-full" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="">
-                                <div class="pl-2 text-sm">
-                                    <p class="mobile-item-user font-bold" >Tuan</p>
-                                    <p>Mr. Chamomile</p>
-                                </div>
-                            </a>
-                            <a href="#" style="display: none;" class="mobile-search-item flex justify-start items-center p-2 hover:bg-emerald-50 rounded-t-xl">
-                                <img class="w-12 h-12 rounded-full" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="">
-                                <div class="pl-2 text-sm">
-                                    <p class="mobile-item-user font-bold" >Ngec</p>
-                                    <p>Mr. Chamomile</p>
-                                </div>
-                            </a>
-                            <a href="#" style="display: none;" class="mobile-search-item flex justify-start items-center p-2 hover:bg-emerald-50 rounded-t-xl">
-                                <img class="w-12 h-12 rounded-full" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="">
-                                <div class="pl-2 text-sm">
-                                    <p class="mobile-item-user font-bold" >Mien</p>
-                                    <p>Mr. Chamomile</p>
-                                </div>
-                            </a> 
+                            <c:forEach items="${sessionScope.search}" var="s">
+                                <a href="#" style="display:none;" class="search-item flex justify-start items-center p-2 hover:bg-emerald-50 rounded-t-xl">
+                                    <img class="w-12 h-12 rounded-full" src="avatar/${s.avatar}" alt="">
+                                    <div class="pl-2 text-sm">
+                                        <p class="item-user font-bold" >${s.username}</p>
+                                        <p>${s.name}</p>
+                                    </div>
+                                </a>
+                            </c:forEach> 
                         </div>
                     </div>
                 </div>        
@@ -198,11 +188,11 @@
                         <img id="image-preview" class=" border-t-none h-80 sm:h-96" src="http://www.arteoral.com.br/wp-content/uploads/2016/04/dummy-post-square-1-768x768.jpg" alt="" />
                         <i id="image-undo" class="absolute top-2 right-2 text-3xl font-bold cursor-pointer ri-arrow-left-circle-line" style="display: none;"></i>
                     </div>
-                    
+
                 </div>
                 <form class="px-6 py-4 w-80 sm:w-96 newpost-item relative bg-white rounded-b-xl" action="addpost" method="post" enctype="multipart/form-data">
                     <label id="image-input-view" class="absolute top-56 right-28 cursor-pointer sm:-top-28 sm:mt-4 sm:right-36 py-1 px-2 bg-emerald-300 hover:bg-emerald-400 rounded-xl" for="image-input">Add photo</label>
-                    <input id="image-input" name="postImage" class="hidden" type="file" accept="image/png, image/jpeg"/>
+                    <input id="image-input" name="postImage" class="hidden" type="file" accept="image/png, image/jpeg" required/>
                     <div class="flex justify-start items-center">
                         <img class="w-7 h-7 rounded-full" src="avatar/${sessionScope.user.avatar}" alt="avt">
                         <p class="ml-2 text-sm font-bold">${sessionScope.user.username}</p>
@@ -250,9 +240,7 @@
                                     <i class="bi bi-three-dots-vertical flex cursor-pointer items-center text-xl sm:text-3xl"></i>
                                 </div>
                                 <div>
-                                    <c:if test="${p.attachment != null}">
-                                        <img class="w-380 h-380 md:w-500 md:h-500" src="post-image/${p.attachment}" alt="" />
-                                    </c:if>
+                                    <img class="w-380 h-380 md:w-500 md:h-500" src="post-image/${p.attachment}" alt="" />     
                                 </div>
                                 <div class="flex justify-between sm:mt-1">
                                     <div class="flex justify-between">
@@ -296,8 +284,50 @@
                                             <span class="font-bold">kienvu</span>
                                             <span>Tớ tỉnh dậy sau 2 ngày liệt giường vì cố gắng tiết kiệm tiền...</span>
                                         </p>
+                                        <c:if test="${requestScope.date.compareTo(p.date) > 0}">
+                                            <c:if test="${requestScope.date.getYear() - p.date.getYear() > 1}">
+                                                <p class="mt-1 mb-2 text-xs text-gray-500 sm:text-base">${requestScope.date.getYear() - p.date.getYear()} years ago</p>
+                                            </c:if>
+                                            <c:if test="${requestScope.date.getYear() - p.date.getYear() == 1}">
+                                                <p class="mt-1 mb-2 text-xs text-gray-500 sm:text-base">${requestScope.date.getYear() - p.date.getYear()} year ago</p>
+                                            </c:if>
+                                            <c:if test="${requestScope.date.getYear() - p.date.getYear() == 0}">
+                                                <c:if test="${requestScope.date.getMonth() - p.date.getMonth() > 1}">
+                                                    <p class="mt-1 mb-2 text-xs text-gray-500 sm:text-base">${requestScope.date.getMonth() - p.date.getMonth()} months ago</p>
+                                                </c:if>
+                                                <c:if test="${requestScope.date.getMonth() - p.date.getMonth() == 1}">
+                                                    <p class="mt-1 mb-2 text-xs text-gray-500 sm:text-base">${requestScope.date.getMonth() - p.date.getMonth()} month ago</p>
+                                                </c:if>
+                                                <c:if test="${requestScope.date.getMonth() - p.date.getMonth() == 0}">
+                                                    <c:if test="${requestScope.date.getDate() - p.date.getDate() > 1}">
+                                                        <p class="mt-1 mb-2 text-xs text-gray-500 sm:text-base">${requestScope.date.getDate() - p.date.getDate()} days ago</p>
+                                                    </c:if>
+                                                    <c:if test="${requestScope.date.getDate() - p.date.getDate() == 1}">
+                                                        <p class="mt-1 mb-2 text-xs text-gray-500 sm:text-base">${requestScope.date.getDate() - p.date.getDate()} day ago</p>
+                                                    </c:if>
+                                                </c:if>
+                                            </c:if>
+                                        </c:if>
+                                        <c:if test="${requestScope.date gt p.date}">
+                                            <c:if test="${requestScope.time.getHours() - p.time.getHours() > 1}">
+                                                <p class="mt-1 mb-2 text-xs text-gray-500 sm:text-base">${requestScope.time.getHours() - p.time.getHours()} hours ago</p>
+                                            </c:if>
+                                            <c:if test="${requestScope.time.getHours() - p.time.getHours() == 1}">
+                                                <p class="mt-1 mb-2 text-xs text-gray-500 sm:text-base">${requestScope.time.getHours() - p.time.getHours()} hour ago</p>
+                                            </c:if>
+                                            <c:if test="${requestScope.time.getHours() - p.time.getHours() == 0}">
+                                                <c:if test="${requestScope.time.getMinutes() - p.time.getMinutes() > 1}">
+                                                    <p class="mt-1 mb-2 text-xs text-gray-500 sm:text-base">${requestScope.time.getMinutes() - p.time.getMinutes()} minutes ago</p>
+                                                </c:if>
+                                                <c:if test="${requestScope.time.getMinutes() - p.time.getMinutes() == 1}">
+                                                    <p class="mt-1 mb-2 text-xs text-gray-500 sm:text-base">${requestScope.time.getMinutes() - p.time.getMinutes()} minute ago</p>
+                                                </c:if>
+                                                <c:if test="${requestScope.time.getMinutes() - p.time.getMinutes() == 0}">
+                                                    <p class="mt-1 mb-2 text-xs text-gray-500 sm:text-base">Just now</p>
+                                                </c:if>
+                                            </c:if>
+                                        </c:if>
 
-                                        <p class="mt-1 mb-2 text-xs text-gray-500 sm:text-base">14 giờ trước</p>
                                     </div>
                                     <div class="relative flex justify-between border-gray-300 p-2 sm:border-t sm:p-4">
                                         <div class="flex items-center">

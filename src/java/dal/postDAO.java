@@ -54,7 +54,7 @@ public class postDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Post p = new Post(rs.getLong(1), rs.getDate(2), rs.getTime(3),
-                        rs.getString(4), rs.getString(5), ud.getUserByUserid(userid));
+                        rs.getString(4), rs.getString(5), ud.getUserByUserid(rs.getLong(6)));
                 posts.add(p);
             }
         } catch (SQLException e) {

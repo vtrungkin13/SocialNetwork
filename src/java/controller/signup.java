@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -91,6 +92,8 @@ public class signup extends HttpServlet {
             if (password.equals(repassword)) {
                 User user = new User(username, password, name, gender.equals("male"), dob);
                 ud.addUser(user);
+                Cookie cookie = new Cookie("user", String.valueOf(ud.getUserByUsername(username).getUserid()));
+                response.addCookie(cookie);
                 response.sendRedirect("home");
             } else {
                 request.setAttribute("passNotMatch", "Password does not match");
