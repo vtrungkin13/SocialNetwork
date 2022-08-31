@@ -59,39 +59,19 @@
                             <div class="border-t pt-1">
                                 <p class="pl-3 font-bold text-emerald-500">Follow request</p>
                                 <!-- loop -->
-                                <div class="cursor-pointer p-3 pl-4">
-                                    <div class="relative flex items-center justify-start">
-                                        <img class="mr-2 inline-flex h-10 w-10 items-center justify-start rounded-full transition" id="avatar" src="https://play-lh.googleusercontent.com/XVHP0sBKrRJYZq_dB1RalwSmx5TcYYRRfYMFO18jgNAnxHAIA1osxM55XHYTb3LpkV8" alt="cute cat" />
-                                        <div class="">
-                                            <p class="font-bold">li.ta2305</p>
-                                            <p class="text-sm text-gray-400">Lita</p>
+                                <c:forEach items="${sessionScope.friendRequest}" var="fr">
+                                    <div class="cursor-pointer p-3 pl-4">
+                                        <div class="relative flex items-center justify-start">
+                                            <img class="mr-2 inline-flex h-10 w-10 items-center justify-start rounded-full transition" id="avatar" src="avatar/${fr.from.avatar}" alt="" />
+                                            <div class="">
+                                                <p class="font-bold">${fr.from.username}</p>
+                                                <p class="text-sm text-gray-400">${fr.from.name}</p>
+                                            </div>
+                                            <a href="addfriend?id=${fr.from.userid}" class="absolute right-20 mr-1 rounded-md border border-gray-300 bg-emerald-400 p-1 px-4 text-sm font-bold text-white hover:bg-emerald-500">Confirm</a>
+                                            <a href="deleterequest?id=${fr.from.userid}" class="absolute right-0 rounded-md border border-gray-300 bg-white p-1 px-4 text-sm font-bold hover:bg-gray-50">Delete</a>
                                         </div>
-                                        <span class="absolute right-20 mr-1 rounded-md border border-gray-300 bg-emerald-400 p-1 px-4 text-sm font-bold text-white hover:bg-emerald-500">Confirm</span>
-                                        <span class="absolute right-0 rounded-md border border-gray-300 bg-white p-1 px-4 text-sm font-bold hover:bg-gray-50">Delete</span>
                                     </div>
-                                </div>
-                                <div class="cursor-pointer p-3 pl-4">
-                                    <div class="relative flex items-center justify-start">
-                                        <img class="mr-2 inline-flex h-10 w-10 items-center justify-start rounded-full transition" id="avatar" src="https://play-lh.googleusercontent.com/XVHP0sBKrRJYZq_dB1RalwSmx5TcYYRRfYMFO18jgNAnxHAIA1osxM55XHYTb3LpkV8" alt="cute cat" />
-                                        <div class="">
-                                            <p class="font-bold">li.ta2305</p>
-                                            <p class="text-sm text-gray-400">Lita</p>
-                                        </div>
-                                        <span class="absolute right-20 mr-1 rounded-md border border-gray-300 bg-emerald-400 p-1 px-4 text-sm font-bold text-white hover:bg-emerald-500">Confirm</span>
-                                        <span class="absolute right-0 rounded-md border border-gray-300 bg-white p-1 px-4 text-sm font-bold hover:bg-gray-50">Delete</span>
-                                    </div>
-                                </div>
-                                <div class="cursor-pointer p-3 pl-4">
-                                    <div class="relative flex items-center justify-start">
-                                        <img class="mr-2 inline-flex h-10 w-10 items-center justify-start rounded-full transition" id="avatar" src="https://play-lh.googleusercontent.com/XVHP0sBKrRJYZq_dB1RalwSmx5TcYYRRfYMFO18jgNAnxHAIA1osxM55XHYTb3LpkV8" alt="cute cat" />
-                                        <div class="">
-                                            <p class="font-bold">li.ta2305</p>
-                                            <p class="text-sm text-gray-400">Lita</p>
-                                        </div>
-                                        <span class="absolute right-20 mr-1 rounded-md border border-gray-300 bg-emerald-400 p-1 px-4 text-sm font-bold text-white hover:bg-emerald-500">Confirm</span>
-                                        <span class="absolute right-0 rounded-md border border-gray-300 bg-white p-1 px-4 text-sm font-bold hover:bg-gray-50">Delete</span>
-                                    </div>
-                                </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>
@@ -212,41 +192,55 @@
 
                         </div>
                         <div class="ml-32 sm:ml-0 flex justify-start text-xl mb-2 sm:mb-5">
-                            <p class=" text-sm sm:text-xl mr-4 sm:mr-16"><span class="mr-1 font-bold">3</span>posts</p>      
+                            <p class=" text-sm sm:text-xl mr-4 sm:mr-16"><span class="mr-1 font-bold">${requestScope.post.size()}</span>${requestScope.post.size() > 1 ? "posts" : "post"}</p>      
                             <div class="relative text-sm sm:text-xl mr-4 sm:mr-16">
-                                <p id="icon-listfollowers" class=" cursor-pointer"><span class="mr-1 font-bold">137</span>followers</p>
+                                <p id="icon-listfollowers" class=" cursor-pointer"><span class="mr-1 font-bold">${requestScope.follower.size()}</span>${requestScope.follower.size() > 1 ? "followers" : "follower"}</p>
                                 <!-- Subnav list followers  -->
                                 <div id="subnav-listfollowers" class="absolute top-8 -right-14 w-60 min-h-fit max-h-96 overflow-y-scroll bg-white rounded-lg py-1 border border-gray-300 shadow-md"  style="visibility:hidden" >
                                     <p class="flex justify-center font-bold text-base p-1 border-b border-gray-400">Followers</p>
                                     <!-- loop  -->
-                                    <div class="flex justify-between items-center p-1">
-                                        <div class="flex justify-start items-center ml-1">
-                                            <img class="w-10 h-10 rounded-full" src=https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow"> 
-                                            <div class="ml-2">
-                                                <a class="text-sm font-bold" href="#">dddejavuu_</a>
-                                                <p class="text-base">Ngô Vú</p>
+                                    <c:forEach items="${requestScope.follower}" var="f">
+                                        <div class="flex justify-between items-center p-1">
+                                            <div class="flex justify-start items-center ml-1">
+                                                <img class="w-10 h-10 rounded-full" src="avatar/${f.user.avatar}" alt=""> 
+                                                <div class="ml-2">
+                                                    <a class="text-sm font-bold" href="profile?id=${f.user.userid}">${f.user.username}</a>
+                                                    <p class="text-base">${f.user.name}</p>
+                                                </div>
                                             </div>
+                                            <p class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Remove</p>
                                         </div>
-                                        <p class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Remove</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="relative text-sm sm:text-xl mr-4 sm:mr-16">
-                                <p id="icon-listfollowing" class="  cursor-pointer"><span class="mr-1 font-bold">291</span>following</p>
-                                <!-- Subnav list Following  -->
-                                <div id="subnav-listfollowing" class="absolute top-8 -right-4 w-64 min-h-fit max-h-96 bg-white rounded-lg py-1 border border-gray-300 shadow-md"  style="visibility:hidden">
-                                    <p class="flex justify-center font-bold text-base p-1 border-b border-gray-400">Following</p>
-                                    <!-- loop  -->
+                                    </c:forEach>
                                     <div class="flex justify-between items-center p-1">
                                         <div class="flex justify-start items-center ml-1">
-                                            <img class="w-10 h-10 rounded-full" src=https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow"> 
+                                            <img class="w-10 h-10 rounded-full" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow"> 
                                             <div class="ml-2">
                                                 <a class="text-sm font-bold" href="#">dddejavuu_</a>
                                                 <p class="text-base">NgÃ´ VÅ©</p>
                                             </div>
                                         </div>
-                                        <p class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Following</p>
-                                    </div>       
+                                        <p class="float-right py-0.5 sm:pb-1 px-3 mr-2 rounded-md font-bold text-sm cursor-pointer bg-emerald-400 opacity-95 hover:opacity-100">Follow</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative text-sm sm:text-xl mr-4 sm:mr-16">
+                                <p id="icon-listfollowing" class="  cursor-pointer"><span class="mr-1 font-bold">${requestScope.following.size()}</span>following</p>
+                                <!-- Subnav list Following  -->
+                                <div id="subnav-listfollowing" class="absolute top-8 -right-4 w-64 min-h-fit max-h-96 bg-white rounded-lg py-1 border border-gray-300 shadow-md"  style="visibility:hidden">
+                                    <p class="flex justify-center font-bold text-base p-1 border-b border-gray-400">Following</p>
+                                    <!-- loop  -->
+                                    <c:forEach items="${requestScope.following}" var="f">
+                                        <div class="flex justify-between items-center p-1">
+                                            <div class="flex justify-start items-center ml-1">
+                                                <img class="w-10 h-10 rounded-full" src="avatar/${f.friend.avatar}" alt=""> 
+                                                <div class="ml-2">
+                                                    <a class="text-sm font-bold" href="profile?id=${f.friend.userid}">${f.friend.username}</a>
+                                                    <p class="text-base">${f.friend.name}</p>
+                                                </div>
+                                            </div>
+                                            <p class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Following</p>
+                                        </div>
+                                    </c:forEach>       
                                 </div>
                             </div>
                         </div>
@@ -285,88 +279,90 @@
                 </div>
             </div>
             <!-- Post  -->
-            <div class ="flex justify-center flex-wrap sm:pt-10">
-                <div>
-                    <img class="post w-28 h-28 xl:w-72 xl:h-72 2xl:h-96 2xl:w-96 m-2 2xl:m-4 cursor-pointer" src=https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow">
-                    <!-- Post detail  -->
-                    <div class="postdetail fixed top-0 right-0 left-0 w-screen h-screen max-h-screen max-w-screen bg-gray-700 bg-opacity-80 z-50" >
-                        <div class="postdetail-container flex flex-col sm:flex-row h-screen w-screen sm:w-2/3 sm:h-5/6 mx-auto sm:mt-20 bg-white pt-10 sm:pt-0">
-                            <div class="w-full flex justify-center items-center">
-                                <img class="w-48 sm:h-fit" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow">
-                            </div>
-                            <div class="relative w-full h-full sm:w-2/3">
-                                <div class=" absolute top-0 left-0 w-full flex justify-between items-center border-b border-gray-200">
-                                    <div class="flex justify-start items-center py-1 sm:py-2">
-                                        <img class="w-8 h-8 rounded-full mr-3 ml-4" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow">
-                                        <p class="text-xs sm:text-sm font-bold mr-1" >tungba103</p>  
-                                    </div>
-                                    <i class="ri-more-line mr-4 font-bold text-xl"></i>
-                                </div>
-                                <div class="mt-12 mb-96 mx-4">
-                                    <!-- Loop  -->
-                                    <div class="flex justify-start items-center py-1 sm:py-2">
-                                        <img class="w-8 h-8 rounded-full mr-3" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow">
-                                        <p class="text-xs sm:text-sm font-bold mr-1" >kientrv132</p>
-                                        <p class="text-sm">Comment nè</p>
-                                    </div>
-                                    <div class="flex justify-start items-center py-1 sm:py-2">
-                                        <img class="w-8 h-8 rounded-full mr-3" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow">
-                                        <p class="text-xs sm:text-sm font-bold mr-1" >tuancang103</p>
-                                        <p class="text-sm">Comment nè</p>
-                                    </div>
-                                </div>
-                                <div class="absolute bottom-0 left-0 w-full border-t border-gray-200" >
-                                    <div>
-                                        <!-- Icon  -->
-                                        <div class="flex justify-between my-4">
-                                            <div class="flex justify-between">
-                                                <!-- Heart Iteraction If else -->
-                                                <svg class="heart-icon mt-1 mr-2 ml-2 w-7 cursor-pointer sm:w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0H24V24H0z"/><path d="M12.001 4.529c2.349-2.109 5.979-2.039 8.242.228 2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236 2.265-2.264 5.888-2.34 8.244-.228zm6.826 1.641c-1.5-1.502-3.92-1.563-5.49-.153l-1.335 1.198-1.336-1.197c-1.575-1.412-3.99-1.35-5.494.154-1.49 1.49-1.565 3.875-.192 5.451L12 18.654l7.02-7.03c1.374-1.577 1.299-3.959-.193-5.454z" fill="rgba(47,204,113,1)"/></svg>
-                                                <svg style="display: none;" class="heart-fill-icon mt-1 mr-2 ml-2 w-7 cursor-pointer sm:w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                <path fill="none" d="M0 0H24V24H0z" />
-                                                <path d="M12.001 4.529c2.349-2.109 5.979-2.039 8.242.228 2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236 2.265-2.264 5.888-2.34 8.244-.228z" fill="rgba(231,76,60,1)" />
-                                                </svg>
 
-                                                <svg class="mt-1 mr-2 ml-2 w-7 cursor-pointer sm:w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" ><path fill="none" d="M0 0h24v24H0z"/><path d="M10 3h4a8 8 0 1 1 0 16v3.5c-5-2-12-5-12-11.5a8 8 0 0 1 8-8zm2 14h2a6 6 0 1 0 0-12h-4a6 6 0 0 0-6 6c0 3.61 2.462 5.966 8 8.48V17z" fill="rgba(47,204,113,1)"/></svg>
-                                                <svg class="mt-1 mr-2 ml-2 w-7 cursor-pointer sm:w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.12 17.023l-4.199-2.29a4 4 0 1 1 0-5.465l4.2-2.29a4 4 0 1 1 .959 1.755l-4.2 2.29a4.008 4.008 0 0 1 0 1.954l4.199 2.29a4 4 0 1 1-.959 1.755zM6 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm11-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" fill="rgba(47,204,113,1)"/></svg>
-
-                                            </div>
-                                            <!-- Save Iteraction If else -->
-                                            <svg class="save-icon mt-1 mr-2 w-6 cursor-pointer sm:w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 2h14a1 1 0 0 1 1 1v19.143a.5.5 0 0 1-.766.424L12 18.03l-7.234 4.536A.5.5 0 0 1 4 22.143V3a1 1 0 0 1 1-1zm13 2H6v15.432l6-3.761 6 3.761V4z" fill="rgba(47,204,113,1)"/></svg>
-                                            <svg style="display: none;" class="save-fill-icon mt-1 mr-2 w-6 cursor-pointer sm:w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path fill="none" d="M0 0h24v24H0z" />
-                                            <path d="M5 2h14a1 1 0 0 1 1 1v19.143a.5.5 0 0 1-.766.424L12 18.03l-7.234 4.536A.5.5 0 0 1 4 22.143V3a1 1 0 0 1 1-1z" fill="rgba(47,204,113,1)" />
-                                            </svg>
+            <div class ="flex justify-center flex-wrap sm:pt-10 xl:mx-20">
+                <c:forEach items="${requestScope.post}" var="p">
+                    <div>
+                        <img class="post w-28 h-28 xl:w-72 xl:h-72 2xl:h-96 2xl:w-96 m-2 2xl:m-4 cursor-pointer" src="post-image/${p.attachment}" alt="">
+                        <!-- Post detail  -->
+                        <div style="visibility: hidden" class="postdetail fixed top-0 right-0 left-0 w-screen h-screen max-h-screen max-w-screen bg-gray-700 bg-opacity-80 z-50" >
+                            <div class="postdetail-container flex flex-col sm:flex-row h-screen w-screen sm:w-2/3 sm:h-5/6 mx-auto sm:mt-20 bg-white pt-10 sm:pt-0">
+                                <div class="w-full flex justify-center items-center">
+                                    <img class="w-48 sm:h-fit" src="post-image/${p.attachment}" alt="">
+                                </div>
+                                <div class="relative w-full h-full sm:w-2/3">
+                                    <div class=" absolute top-0 left-0 w-full flex justify-between items-center border-b border-gray-200">
+                                        <div class="flex justify-start items-center py-1 sm:py-2">
+                                            <img class="w-8 h-8 rounded-full mr-3 ml-4" src="avatar/${p.user.avatar}" alt="meow">
+                                            <p class="text-xs sm:text-sm font-bold mr-1" >${p.user.username}</p>  
                                         </div>
-                                        <!-- Iteraction  -->
-                                        <div class="text-sm">
-                                            <div class="ml-4">
-                                                <p>
-                                                    <span class="font-bold">312 likes</span>
-                                                    <span class="text-sm">Người thích: tungba.103 và 25 người khác</span>
-                                                </p>
-                                                <p class="mt-1 mb-2 text-xs text-gray-500">14 giờ trước</p>
+                                        <i class="ri-more-line mr-4 font-bold text-xl"></i>
+                                    </div>
+                                    <div class="mt-12 mb-96 mx-4">
+                                        <!-- Loop  -->
+                                        <div class="flex justify-start items-center py-1 sm:py-2">
+                                            <img class="w-8 h-8 rounded-full mr-3" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow">
+                                            <p class="text-xs sm:text-sm font-bold mr-1" >kientrv132</p>
+                                            <p class="text-sm">Comment nè</p>
+                                        </div>
+                                        <div class="flex justify-start items-center py-1 sm:py-2">
+                                            <img class="w-8 h-8 rounded-full mr-3" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow">
+                                            <p class="text-xs sm:text-sm font-bold mr-1" >tuancang103</p>
+                                            <p class="text-sm">Comment nè</p>
+                                        </div>
+                                    </div>
+                                    <div class="absolute bottom-0 left-0 w-full border-t border-gray-200" >
+                                        <div>
+                                            <!-- Icon  -->
+                                            <div class="flex justify-between my-4">
+                                                <div class="flex justify-between">
+                                                    <!-- Heart Iteraction If else -->
+                                                    <svg class="heart-icon mt-1 mr-2 ml-2 w-7 cursor-pointer sm:w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0H24V24H0z"/><path d="M12.001 4.529c2.349-2.109 5.979-2.039 8.242.228 2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236 2.265-2.264 5.888-2.34 8.244-.228zm6.826 1.641c-1.5-1.502-3.92-1.563-5.49-.153l-1.335 1.198-1.336-1.197c-1.575-1.412-3.99-1.35-5.494.154-1.49 1.49-1.565 3.875-.192 5.451L12 18.654l7.02-7.03c1.374-1.577 1.299-3.959-.193-5.454z" fill="rgba(47,204,113,1)"/></svg>
+                                                    <svg style="display: none;" class="heart-fill-icon mt-1 mr-2 ml-2 w-7 cursor-pointer sm:w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path fill="none" d="M0 0H24V24H0z" />
+                                                    <path d="M12.001 4.529c2.349-2.109 5.979-2.039 8.242.228 2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236 2.265-2.264 5.888-2.34 8.244-.228z" fill="rgba(231,76,60,1)" />
+                                                    </svg>
+
+                                                    <svg class="mt-1 mr-2 ml-2 w-7 cursor-pointer sm:w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" ><path fill="none" d="M0 0h24v24H0z"/><path d="M10 3h4a8 8 0 1 1 0 16v3.5c-5-2-12-5-12-11.5a8 8 0 0 1 8-8zm2 14h2a6 6 0 1 0 0-12h-4a6 6 0 0 0-6 6c0 3.61 2.462 5.966 8 8.48V17z" fill="rgba(47,204,113,1)"/></svg>
+                                                    <svg class="mt-1 mr-2 ml-2 w-7 cursor-pointer sm:w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13.12 17.023l-4.199-2.29a4 4 0 1 1 0-5.465l4.2-2.29a4 4 0 1 1 .959 1.755l-4.2 2.29a4.008 4.008 0 0 1 0 1.954l4.199 2.29a4 4 0 1 1-.959 1.755zM6 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm11-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" fill="rgba(47,204,113,1)"/></svg>
+
+                                                </div>
+                                                <!-- Save Iteraction If else -->
+                                                <svg class="save-icon mt-1 mr-2 w-6 cursor-pointer sm:w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5 2h14a1 1 0 0 1 1 1v19.143a.5.5 0 0 1-.766.424L12 18.03l-7.234 4.536A.5.5 0 0 1 4 22.143V3a1 1 0 0 1 1-1zm13 2H6v15.432l6-3.761 6 3.761V4z" fill="rgba(47,204,113,1)"/></svg>
+                                                <svg style="display: none;" class="save-fill-icon mt-1 mr-2 w-6 cursor-pointer sm:w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                <path fill="none" d="M0 0h24v24H0z" />
+                                                <path d="M5 2h14a1 1 0 0 1 1 1v19.143a.5.5 0 0 1-.766.424L12 18.03l-7.234 4.536A.5.5 0 0 1 4 22.143V3a1 1 0 0 1 1-1z" fill="rgba(47,204,113,1)" />
+                                                </svg>
                                             </div>
-                                            <div class="relative flex justify-between border-gray-300 p-2 sm:border-t">
-                                                <div class="flex items-center">
-                                                    <img class="mr-3 h-8 w-8 rounded-full" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="" />
-                                                    <form class="" action="comment">
-                                                        <input class="w-56 focus:outline-none" type="text" placeholder="Thêm bình luận..." />
-                                                        <button class="absolute top-2 py-1 px-2 right-2  rounded-lg bg-emerald-400 hover:bg-emerald-500 font-bold">Post</button>
-                                                    </form>
+                                            <!-- Iteraction  -->
+                                            <div class="text-sm">
+                                                <div class="ml-4">
+                                                    <p>
+                                                        <span class="font-bold">312 likes</span>
+                                                        <span class="text-sm">Người thích: tungba.103 và 25 người khác</span>
+                                                    </p>
+                                                    <p class="mt-1 mb-2 text-xs text-gray-500">14 giờ trước</p>
+                                                </div>
+                                                <div class="relative flex justify-between border-gray-300 p-2 sm:border-t">
+                                                    <div class="flex items-center">
+                                                        <img class="mr-3 h-8 w-8 rounded-full" src="avatar/${sessionScope.user.avatar}" alt="" />
+                                                        <form class="" action="comment">
+                                                            <input class="w-56 focus:outline-none" type="text" placeholder="Thêm bình luận..." />
+                                                            <button class="absolute top-2 py-1 px-2 right-2  rounded-lg bg-emerald-400 hover:bg-emerald-500 font-bold">Post</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="absolute top-2 right-4 sm:right-8 text-2xl sm:text-white cursor-pointer opacity-80 hover:opacity-100">X</div>
                         </div>
-                        <div class="absolute top-2 right-4 sm:right-8 text-2xl sm:text-white cursor-pointer opacity-80 hover:opacity-100">X</div>
                     </div>
-                </div>
-
-
+                </c:forEach>
             </div>
+
         </div>
     </body>
     <script src="javascript/navigation.js"></script>

@@ -59,39 +59,19 @@
                             <div class="border-t pt-1">
                                 <p class="pl-3 font-bold text-emerald-500">Follow request</p>
                                 <!-- loop -->
-                                <div class="cursor-pointer p-3 pl-4">
-                                    <div class="relative flex items-center justify-start">
-                                        <img class="mr-2 inline-flex h-10 w-10 items-center justify-start rounded-full transition" id="avatar" src="https://play-lh.googleusercontent.com/XVHP0sBKrRJYZq_dB1RalwSmx5TcYYRRfYMFO18jgNAnxHAIA1osxM55XHYTb3LpkV8" alt="cute cat" />
-                                        <div class="">
-                                            <p class="font-bold">li.ta2305</p>
-                                            <p class="text-sm text-gray-400">Lita</p>
+                                <c:forEach items="${sessionScope.friendRequest}" var="fr">
+                                    <div class="cursor-pointer p-3 pl-4">
+                                        <div class="relative flex items-center justify-start">
+                                            <img class="mr-2 inline-flex h-10 w-10 items-center justify-start rounded-full transition" id="avatar" src="avatar/${fr.from.avatar}" alt="" />
+                                            <div class="">
+                                                <p class="font-bold">${fr.from.username}</p>
+                                                <p class="text-sm text-gray-400">${fr.from.name}</p>
+                                            </div>
+                                            <a href="addfriend?id=${fr.from.userid}" class="absolute right-20 mr-1 rounded-md border border-gray-300 bg-emerald-400 p-1 px-4 text-sm font-bold text-white hover:bg-emerald-500">Confirm</a>
+                                            <a href="deleterequest?id=${fr.from.userid}" class="absolute right-0 rounded-md border border-gray-300 bg-white p-1 px-4 text-sm font-bold hover:bg-gray-50">Delete</a>
                                         </div>
-                                        <span class="absolute right-20 mr-1 rounded-md border border-gray-300 bg-emerald-400 p-1 px-4 text-sm font-bold text-white hover:bg-emerald-500">Confirm</span>
-                                        <span class="absolute right-0 rounded-md border border-gray-300 bg-white p-1 px-4 text-sm font-bold hover:bg-gray-50">Delete</span>
                                     </div>
-                                </div>
-                                <div class="cursor-pointer p-3 pl-4">
-                                    <div class="relative flex items-center justify-start">
-                                        <img class="mr-2 inline-flex h-10 w-10 items-center justify-start rounded-full transition" id="avatar" src="https://play-lh.googleusercontent.com/XVHP0sBKrRJYZq_dB1RalwSmx5TcYYRRfYMFO18jgNAnxHAIA1osxM55XHYTb3LpkV8" alt="cute cat" />
-                                        <div class="">
-                                            <p class="font-bold">li.ta2305</p>
-                                            <p class="text-sm text-gray-400">Lita</p>
-                                        </div>
-                                        <span class="absolute right-20 mr-1 rounded-md border border-gray-300 bg-emerald-400 p-1 px-4 text-sm font-bold text-white hover:bg-emerald-500">Confirm</span>
-                                        <span class="absolute right-0 rounded-md border border-gray-300 bg-white p-1 px-4 text-sm font-bold hover:bg-gray-50">Delete</span>
-                                    </div>
-                                </div>
-                                <div class="cursor-pointer p-3 pl-4">
-                                    <div class="relative flex items-center justify-start">
-                                        <img class="mr-2 inline-flex h-10 w-10 items-center justify-start rounded-full transition" id="avatar" src="https://play-lh.googleusercontent.com/XVHP0sBKrRJYZq_dB1RalwSmx5TcYYRRfYMFO18jgNAnxHAIA1osxM55XHYTb3LpkV8" alt="cute cat" />
-                                        <div class="">
-                                            <p class="font-bold">li.ta2305</p>
-                                            <p class="text-sm text-gray-400">Lita</p>
-                                        </div>
-                                        <span class="absolute right-20 mr-1 rounded-md border border-gray-300 bg-emerald-400 p-1 px-4 text-sm font-bold text-white hover:bg-emerald-500">Confirm</span>
-                                        <span class="absolute right-0 rounded-md border border-gray-300 bg-white p-1 px-4 text-sm font-bold hover:bg-gray-50">Delete</span>
-                                    </div>
-                                </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>

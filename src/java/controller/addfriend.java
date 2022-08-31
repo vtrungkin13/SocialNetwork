@@ -6,8 +6,6 @@
 package controller;
 
 import dal.friendDAO;
-import dal.postDAO;
-import dal.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,18 +14,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.Friend;
-import model.FriendRequest;
-import model.Post;
 import model.User;
 
 /**
  *
  * @author vtrun
  */
-@WebServlet(name="profile", urlPatterns={"/profile"})
-public class profile extends HttpServlet {
+@WebServlet(name="addfriend", urlPatterns={"/addfriend"})
+public class addfriend extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -44,10 +38,10 @@ public class profile extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet profile</title>");  
+            out.println("<title>Servlet addfriend</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet profile at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet addfriend at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,26 +59,14 @@ public class profile extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         long id = Long.parseLong(request.getParameter("id"));
-        userDAO ud = new userDAO();
-        User user = ud.getUserByUserid(id);
-        request.setAttribute("userSearch", user);
+        HttpSession session = request.getSession();
+        User u = (User) session.getAttribute("user");
         
         friendDAO fd = new friendDAO();
-        List<Friend> following = fd.getFriendsByUserid(user.getUserid());
-        List<Friend> follower = fd.getFriendsByFriendid(user.getUserid());
-        request.setAttribute("following", following);
-        request.setAttribute("follower", follower);
+        fd.addFriend(id, u.getUserid());
+        fd.deleteFriendRequest(id, u.getUserid());
         
-        postDAO pd = new postDAO();
-        List<Post> posts = pd.getPostsByUserid(user.getUserid());
-        request.setAttribute("post", posts);
-        
-        boolean isFriend = fd.isFriend(user.getUserid(), id);
-        boolean isSentFriendRequest = fd.isSentFriendRequest(user.getUserid(), id);
-        request.setAttribute("isFollow", isFriend);
-        request.setAttribute("isSentFriendRequest", isSentFriendRequest);
-        
-        request.getRequestDispatcher("profilefriend.jsp").forward(request, response);
+        response.sendRedirect("home");
     } 
 
     /** 
@@ -97,20 +79,7 @@ public class profile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
         
-        friendDAO fd = new friendDAO();
-        List<Friend> following = fd.getFriendsByUserid(user.getUserid());
-        List<Friend> follower = fd.getFriendsByFriendid(user.getUserid());
-        request.setAttribute("following", following);
-        request.setAttribute("follower", follower);
-        
-        postDAO pd = new postDAO();
-        List<Post> posts = pd.getPostsByUserid(user.getUserid());
-        request.setAttribute("post", posts);
-        
-        request.getRequestDispatcher("profile.jsp").forward(request, response);
     }
 
     /** 

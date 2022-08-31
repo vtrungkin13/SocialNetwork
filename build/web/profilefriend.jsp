@@ -59,39 +59,19 @@
                             <div class="border-t pt-1">
                                 <p class="pl-3 font-bold text-emerald-500">Follow request</p>
                                 <!-- loop -->
-                                <div class="cursor-pointer p-3 pl-4">
-                                    <div class="relative flex items-center justify-start">
-                                        <img class="mr-2 inline-flex h-10 w-10 items-center justify-start rounded-full transition" id="avatar" src="https://play-lh.googleusercontent.com/XVHP0sBKrRJYZq_dB1RalwSmx5TcYYRRfYMFO18jgNAnxHAIA1osxM55XHYTb3LpkV8" alt="cute cat" />
-                                        <div class="">
-                                            <p class="font-bold">li.ta2305</p>
-                                            <p class="text-sm text-gray-400">Lita</p>
+                                <c:forEach items="${sessionScope.friendRequest}" var="fr">
+                                    <div class="cursor-pointer p-3 pl-4">
+                                        <div class="relative flex items-center justify-start">
+                                            <img class="mr-2 inline-flex h-10 w-10 items-center justify-start rounded-full transition" id="avatar" src="avatar/${fr.from.avatar}" alt="" />
+                                            <div class="">
+                                                <p class="font-bold">${fr.from.username}</p>
+                                                <p class="text-sm text-gray-400">${fr.from.name}</p>
+                                            </div>
+                                            <a href="addfriend?id=${fr.from.userid}" class="absolute right-20 mr-1 rounded-md border border-gray-300 bg-emerald-400 p-1 px-4 text-sm font-bold text-white hover:bg-emerald-500">Confirm</a>
+                                            <a href="deleterequest?id=${fr.from.userid}" class="absolute right-0 rounded-md border border-gray-300 bg-white p-1 px-4 text-sm font-bold hover:bg-gray-50">Delete</a>
                                         </div>
-                                        <span class="absolute right-20 mr-1 rounded-md border border-gray-300 bg-emerald-400 p-1 px-4 text-sm font-bold text-white hover:bg-emerald-500">Confirm</span>
-                                        <span class="absolute right-0 rounded-md border border-gray-300 bg-white p-1 px-4 text-sm font-bold hover:bg-gray-50">Delete</span>
                                     </div>
-                                </div>
-                                <div class="cursor-pointer p-3 pl-4">
-                                    <div class="relative flex items-center justify-start">
-                                        <img class="mr-2 inline-flex h-10 w-10 items-center justify-start rounded-full transition" id="avatar" src="https://play-lh.googleusercontent.com/XVHP0sBKrRJYZq_dB1RalwSmx5TcYYRRfYMFO18jgNAnxHAIA1osxM55XHYTb3LpkV8" alt="cute cat" />
-                                        <div class="">
-                                            <p class="font-bold">li.ta2305</p>
-                                            <p class="text-sm text-gray-400">Lita</p>
-                                        </div>
-                                        <span class="absolute right-20 mr-1 rounded-md border border-gray-300 bg-emerald-400 p-1 px-4 text-sm font-bold text-white hover:bg-emerald-500">Confirm</span>
-                                        <span class="absolute right-0 rounded-md border border-gray-300 bg-white p-1 px-4 text-sm font-bold hover:bg-gray-50">Delete</span>
-                                    </div>
-                                </div>
-                                <div class="cursor-pointer p-3 pl-4">
-                                    <div class="relative flex items-center justify-start">
-                                        <img class="mr-2 inline-flex h-10 w-10 items-center justify-start rounded-full transition" id="avatar" src="https://play-lh.googleusercontent.com/XVHP0sBKrRJYZq_dB1RalwSmx5TcYYRRfYMFO18jgNAnxHAIA1osxM55XHYTb3LpkV8" alt="cute cat" />
-                                        <div class="">
-                                            <p class="font-bold">li.ta2305</p>
-                                            <p class="text-sm text-gray-400">Lita</p>
-                                        </div>
-                                        <span class="absolute right-20 mr-1 rounded-md border border-gray-300 bg-emerald-400 p-1 px-4 text-sm font-bold text-white hover:bg-emerald-500">Confirm</span>
-                                        <span class="absolute right-0 rounded-md border border-gray-300 bg-white p-1 px-4 text-sm font-bold hover:bg-gray-50">Delete</span>
-                                    </div>
-                                </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>
@@ -254,67 +234,51 @@
                         <div class="flex flex-row justify-start items-center mb-2 sm:mb-5">
                             <p class="text-xl sm:text-3xl font-thin">${requestScope.userSearch.username}</p>
                             <div class="flex sm:ml-0 text-sm sm:text-base items-center">
-                                <a href="edit" class="rounded-md flex justify-center items-center border border-gray-400 h-7 px-1 sm:px-2 py-2 sm:py-2 ml-4 font-bold cursor-pointer bg-gray-50">Message</a>
-                                <a href="edit" class="rounded-md flex justify-center items-center border border-gray-400 h-7 px-1 sm:px-2 py-2 sm:py-2 ml-2 font-bold cursor-pointer bg-gray-50">
+                                <a href="" class="rounded-md flex justify-center items-center border border-gray-400 h-7 px-1 sm:px-2 py-2 sm:py-2 ml-4 font-bold cursor-pointer bg-gray-50">Message</a>
+                                <a href="" class="rounded-md flex justify-center items-center border border-gray-400 h-7 px-1 sm:px-2 py-2 sm:py-2 ml-2 font-bold cursor-pointer bg-gray-50">
                                     <i class="ri-user-follow-line"></i>
                                 </a>
                             </div>
 
                         </div>
                         <div class="ml-32 sm:ml-0 flex justify-start text-xl mb-2 sm:mb-5">
-                            <p class=" text-sm sm:text-xl mr-4 sm:mr-16"><span class="mr-1 font-bold">3</span>posts</p>      
+                            <p class=" text-sm sm:text-xl mr-4 sm:mr-16"><span class="mr-1 font-bold">${requestScope.post.size()}</span>${requestScope.post.size() > 1 ? "posts" : "post"}</p>     
                             <div class="relative text-sm sm:text-xl mr-4 sm:mr-16">
-                                <p id="icon-listfollowers" class=" cursor-pointer"><span class="mr-1 font-bold">137</span>followers</p>
+                               <p id="icon-listfollowers" class=" cursor-pointer"><span class="mr-1 font-bold">${requestScope.follower.size()}</span>${requestScope.follower.size() > 1 ? "followers" : "follower"}</p>
                                 <!-- Subnav list followers  -->
                                 <div id="subnav-listfollowers" class="absolute top-8 -right-14 min-h-fit w-72 max-h-96 overflow-y-scroll bg-white rounded-lg py-1 border border-gray-300 shadow-md"  style="visibility:hidden" >
                                     <p class="flex justify-center font-bold text-base p-1 border-b border-gray-400">Followers</p>
-                                    <div class="flex justify-between items-center p-1">
-                                        <div class="flex justify-start items-center ml-1">
-                                            <img class="w-10 h-10 rounded-full" src=https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow"> 
-                                            <div class="ml-2">
-                                                <a class="text-sm font-bold" href="#">dddejavuu_</a>
-                                                <p class="text-base">Ngô Vú</p>
+                                    <c:forEach items="${requestScope.follower}" var="f">
+                                        <div class="flex justify-between items-center p-1">
+                                            <div class="flex justify-start items-center ml-1">
+                                                <img class="w-10 h-10 rounded-full" src="avatar/${f.user.avatar}" alt=""> 
+                                                <div class="ml-2">
+                                                    <a class="text-sm font-bold" href="profile?id=${f.user.userid}">${f.user.username}</a>
+                                                    <p class="text-base">${f.user.name}</p>
+                                                </div>
                                             </div>
+                                            <p class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Remove</p>
                                         </div>
-                                        <p class="float-right py-0.5 sm:pb-1 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Following</p>
-                                    </div> 
-                                    <div class="flex justify-between items-center p-1">
-                                        <div class="flex justify-start items-center ml-1">
-                                            <img class="w-10 h-10 rounded-full" src=https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow"> 
-                                            <div class="ml-2">
-                                                <a class="text-sm font-bold" href="#">dddejavuu_</a>
-                                                <p class="text-base">Ngô Vú</p>
-                                            </div>
-                                        </div>
-                                        <p class="float-right py-0.5 sm:pb-1 px-4 mr-2 rounded-md font-bold text-sm cursor-pointer bg-emerald-400 opacity-95 hover:opacity-100">Follow</p>
-                                    </div>                                    
+                                    </c:forEach>                                   
                                 </div>
                             </div>
                             <div class="relative text-sm sm:text-xl mr-4 sm:mr-16">
-                                <p id="icon-listfollowing" class="  cursor-pointer"><span class="mr-1 font-bold">291</span>following</p>
+                                <p id="icon-listfollowing" class="  cursor-pointer"><span class="mr-1 font-bold">${requestScope.following.size()}</span>following</p>
                                 <!-- Subnav list Following  -->
                                 <div id="subnav-listfollowing" class="absolute top-8 -right-4 w-72 min-h-fit max-h-96 bg-white rounded-lg py-1 border border-gray-300 shadow-md"  style="visibility:hidden">
                                     <p class="flex justify-center font-bold text-base p-1 border-b border-gray-400">Following</p>
-                                    <div class="flex justify-between items-center p-1">
-                                        <div class="flex justify-start items-center ml-1">
-                                            <img class="w-10 h-10 rounded-full" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow"> 
-                                            <div class="ml-2">
-                                                <a class="text-sm font-bold" href="#">dddejavuu_</a>
-                                                <p class="text-base">NgÃ´ VÅ©</p>
+                                    <c:forEach items="${requestScope.following}" var="f">
+                                        <div class="flex justify-between items-center p-1">
+                                            <div class="flex justify-start items-center ml-1">
+                                                <img class="w-10 h-10 rounded-full" src="avatar/${f.friend.avatar}" alt=""> 
+                                                <div class="ml-2">
+                                                    <a class="text-sm font-bold" href="profile?id=${f.friend.userid}">${f.friend.username}</a>
+                                                    <p class="text-base">${f.friend.name}</p>
+                                                </div>
                                             </div>
+                                            <p class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Following</p>
                                         </div>
-                                        <p class="float-right py-0.5 sm:pb-1 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Following</p>
-                                    </div>
-                                    <div class="flex justify-between items-center p-1">
-                                        <div class="flex justify-start items-center ml-1">
-                                            <img class="w-10 h-10 rounded-full" src="https://thumbs.dreamstime.com/b/cute-cat-portrait-square-photo-beautiful-white-closeup-105311158.jpg" alt="meow"> 
-                                            <div class="ml-2">
-                                                <a class="text-sm font-bold" href="#">dddejavuu_</a>
-                                                <p class="text-base">NgÃ´ VÅ©</p>
-                                            </div>
-                                        </div>
-                                        <p class="float-right py-0.5 sm:pb-1 px-3 mr-2 rounded-md font-bold text-sm cursor-pointer bg-emerald-400 opacity-95 hover:opacity-100">Follow</p>
-                                    </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>

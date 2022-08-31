@@ -78,4 +78,23 @@ public class postDAO extends DBContext {
 
         }
     }
+    
+    public List<Post> getPostsByUserid(long userid) {
+        List<Post> posts = new ArrayList<>();
+        userDAO ud = new userDAO();
+        String sql = "select * from [post] where [userid] = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setLong(1, userid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Post p = new Post(rs.getLong(1), rs.getDate(2), rs.getTime(3),
+                        rs.getString(4), rs.getString(5), ud.getUserByUserid(userid));
+                posts.add(p);
+            }
+        } catch (SQLException e) {
+
+        }
+        return posts;
+    }
 }

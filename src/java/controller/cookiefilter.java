@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.friendDAO;
 import dal.userDAO;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -21,6 +22,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.FriendRequest;
 import model.User;
 
 /**
@@ -135,6 +137,10 @@ public class cookiefilter implements Filter {
                 
                 List<User> users = ud.getUsersSearch(u.getUserid());
                 session.setAttribute("search", users);
+                
+                friendDAO fd = new friendDAO();
+                List<FriendRequest> requests = fd.getFriendRequestToUserid(u.getUserid());
+                session.setAttribute("friendRequest", requests);
             } else {
                 resp.sendRedirect("signin");
             }
