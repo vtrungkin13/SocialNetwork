@@ -244,5 +244,5 @@
     </div>
 </body>
 <!-- Nav js  -->
-<script src="navigation.js"></script>
+<script src="javascript/navigation.js"></script>
 </html>

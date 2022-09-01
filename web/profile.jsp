@@ -208,7 +208,7 @@
                                                     <p class="text-base">${f.user.name}</p>
                                                 </div>
                                             </div>
-                                            <p class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Remove</p>
+                                            <a href="#" class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Remove</a>
                                         </div>
                                     </c:forEach>
                                     <div class="flex justify-between items-center p-1">
@@ -219,7 +219,7 @@
                                                 <p class="text-base">NgÃ´ VÅ©</p>
                                             </div>
                                         </div>
-                                        <p class="float-right py-0.5 sm:pb-1 px-3 mr-2 rounded-md font-bold text-sm cursor-pointer bg-emerald-400 opacity-95 hover:opacity-100">Follow</p>
+                                        <a href="#" class="float-right py-0.5 sm:pb-1 px-3 mr-2 rounded-md font-bold text-sm cursor-pointer bg-emerald-400 opacity-95 hover:opacity-100">Follow</a>
                                     </div>
                                 </div>
                             </div>
@@ -238,7 +238,7 @@
                                                     <p class="text-base">${f.friend.name}</p>
                                                 </div>
                                             </div>
-                                            <p class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Following</p>
+                                            <a href="#" class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Following</a>
                                         </div>
                                     </c:forEach>       
                                 </div>

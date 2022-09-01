@@ -235,9 +235,9 @@
                             <p class="text-xl sm:text-3xl font-thin">${requestScope.userSearch.username}</p>
                             <div class="flex sm:ml-0 text-sm sm:text-base items-center">
                                 <a href="" class="rounded-md flex justify-center items-center border border-gray-400 h-7 px-1 sm:px-2 py-2 sm:py-2 ml-4 font-bold cursor-pointer bg-gray-50">Message</a>
-                                <a href="" class="rounded-md flex justify-center items-center border border-gray-400 h-7 px-1 sm:px-2 py-2 sm:py-2 ml-2 font-bold cursor-pointer bg-gray-50">
+                                <p id="unfollow-btn" class="rounded-md flex justify-center items-center border border-gray-400 h-7 px-1 sm:px-2 py-2 sm:py-2 ml-2 font-bold cursor-pointer bg-gray-50">
                                     <i class="ri-user-follow-line"></i>
-                                </a>
+                                </p>
                             </div>
 
                         </div>
@@ -257,7 +257,27 @@
                                                     <p class="text-base">${f.user.name}</p>
                                                 </div>
                                             </div>
-                                            <p class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Remove</p>
+                                            <a href="#" class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Following</a>
+                                        </div>
+                                        <div class="flex justify-between items-center p-1">
+                                            <div class="flex justify-start items-center ml-1">
+                                                <img class="w-10 h-10 rounded-full" src="avatar/${f.user.avatar}" alt=""> 
+                                                <div class="ml-2">
+                                                    <a class="text-sm font-bold" href="profile?id=${f.user.userid}">${f.user.username}</a>
+                                                    <p class="text-base">${f.user.name}</p>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Requesting</a>
+                                        </div>
+                                        <div class="flex justify-between items-center p-1">
+                                            <div class="flex justify-start items-center ml-1">
+                                                <img class="w-10 h-10 rounded-full" src="avatar/${f.user.avatar}" alt=""> 
+                                                <div class="ml-2">
+                                                    <a class="text-sm font-bold" href="profile?id=${f.user.userid}">${f.user.username}</a>
+                                                    <p class="text-base">${f.user.name}</p>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-emerald-300">Follow</a>
                                         </div>
                                     </c:forEach>                                   
                                 </div>
@@ -277,6 +297,26 @@
                                                 </div>
                                             </div>
                                             <p class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Following</p>
+                                        </div>
+                                        <div class="flex justify-between items-center p-1">
+                                            <div class="flex justify-start items-center ml-1">
+                                                <img class="w-10 h-10 rounded-full" src="avatar/${f.friend.avatar}" alt=""> 
+                                                <div class="ml-2">
+                                                    <a class="text-sm font-bold" href="profile?id=${f.friend.userid}">${f.friend.username}</a>
+                                                    <p class="text-base">${f.friend.name}</p>
+                                                </div>
+                                            </div>
+                                            <p class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-gray-50">Requesting</p>
+                                        </div>
+                                        <div class="flex justify-between items-center p-1">
+                                            <div class="flex justify-start items-center ml-1">
+                                                <img class="w-10 h-10 rounded-full" src="avatar/${f.friend.avatar}" alt=""> 
+                                                <div class="ml-2">
+                                                    <a class="text-sm font-bold" href="profile?id=${f.friend.userid}">${f.friend.username}</a>
+                                                    <p class="text-base">${f.friend.name}</p>
+                                                </div>
+                                            </div>
+                                            <p class="float-right py-0.5 px-2 mr-2 rounded-md border border-gray-400 font-bold text-sm cursor-pointer bg-emerald-300">Follow</p>
                                         </div>
                                     </c:forEach>
                                 </div>
@@ -332,5 +372,14 @@
     </body>
     <script src="javascript/navigation.js"></script>
     <script src="javascript/profile.js"></script>
+    <script>
+        var unfollowBtn = document.getElementById("unfollow-btn");
+        unfollowBtn.addEventListener("click", function() {
+            var accepted = confirm("Do you want to unfollow?")
+            if(accepted) {
+                // Do something
+            }
+        })
+    </script>
 </html>
 
