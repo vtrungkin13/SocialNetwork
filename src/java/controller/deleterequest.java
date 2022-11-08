@@ -5,9 +5,9 @@
 
 package controller;
 
-import dal.friendDAO;
+import dal.followDAO;
+import dal.userDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,29 +23,7 @@ import model.User;
 @WebServlet(name="deleterequest", urlPatterns={"/deleterequest"})
 public class deleterequest extends HttpServlet {
    
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet deleterequest</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet deleterequest at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    } 
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -58,12 +36,14 @@ public class deleterequest extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        long id = Long.parseLong(request.getParameter("id"));
+        String username = request.getParameter("username");
         HttpSession session = request.getSession();
-        User u = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
+        userDAO ud = new userDAO();
+        User requestedUser = ud.getUserByUsername(username);
         
-        friendDAO fd = new friendDAO();
-        fd.deleteFriendRequest(id, u.getUserid());
+        followDAO fd = new followDAO();
+        fd.deleteFollowRequest(requestedUser, user);
         
         response.sendRedirect("home");
     } 

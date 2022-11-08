@@ -12,24 +12,23 @@ import java.sql.Time;
  * @author tungb
  */
 public class Post {
+
     private long postId;
     private Date date;
     private Time time;
     private String content;
-    private String attachment;
+    private String image;
     private User user;
 
     public Post() {
-        this.content = null;
-        this.attachment = null;
     }
 
-    public Post(long postId, Date date, Time time, String content, String attachment, User user) {
+    public Post(long postId, Date date, Time time, String content, String image, User user) {
         this.postId = postId;
         this.date = date;
         this.time = time;
         this.content = content;
-        this.attachment = attachment;
+        this.image = image;
         this.user = user;
     }
 
@@ -65,12 +64,12 @@ public class Post {
         this.content = content;
     }
 
-    public String getAttachment() {
-        return attachment;
+    public String getImage() {
+        return image;
     }
 
-    public void setAttachment(String attachment) {
-        this.attachment = attachment;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public User getUser() {
@@ -80,7 +79,5 @@ public class Post {
     public void setUser(User user) {
         this.user = user;
     }
-    
-    
-    
+
 }

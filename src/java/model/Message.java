@@ -12,8 +12,9 @@ import java.sql.Time;
  * @author tungb
  */
 public class Message {
-    private User from;
-    private User to;
+
+    private User fromUser;
+    private User toUser;
     private Date date;
     private Time time;
     private String content;
@@ -21,28 +22,28 @@ public class Message {
     public Message() {
     }
 
-    public Message(User from, User to, Date date, Time time, String content) {
-        this.from = from;
-        this.to = to;
+    public Message(User fromUser, User toUser, Date date, Time time, String content) {
+        this.fromUser = fromUser;
+        this.toUser = toUser;
         this.date = date;
         this.time = time;
         this.content = content;
     }
 
-    public User getFrom() {
-        return from;
+    public User getFromUser() {
+        return fromUser;
     }
 
-    public void setFrom(User from) {
-        this.from = from;
+    public void setFromUser(User fromUser) {
+        this.fromUser = fromUser;
     }
 
-    public User getTo() {
-        return to;
+    public User getToUser() {
+        return toUser;
     }
 
-    public void setTo(User to) {
-        this.to = to;
+    public void setToUser(User toUser) {
+        this.toUser = toUser;
     }
 
     public Date getDate() {
@@ -68,7 +69,5 @@ public class Message {
     public void setContent(String content) {
         this.content = content;
     }
-    
-    
-    
+
 }

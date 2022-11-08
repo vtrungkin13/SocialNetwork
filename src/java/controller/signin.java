@@ -7,40 +7,20 @@ package controller;
 
 import dal.userDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
 import model.User;
 
 /**
  *
- * @author tungb
+ * @author vtrun
  */
 @WebServlet(name="signin", urlPatterns={"/signin"})
 public class signin extends HttpServlet {
-   
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet signin</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet signin at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -54,15 +34,15 @@ public class signin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         Cookie[] cookies = request.getCookies();
-        boolean signin = false;
+        boolean isSignin = false;
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("user")) {
-                    signin = true;
+                if (cookie.getName().equals("uid")) {
+                    isSignin = true;
                 }
             }
         }
-        if (signin) {
+        if (isSignin) {
             response.sendRedirect("home");
         } else {
             request.getRequestDispatcher("signin.jsp").forward(request,response);
@@ -84,10 +64,10 @@ public class signin extends HttpServlet {
         boolean remember = request.getParameter("remmember") != null;
         
         userDAO ud = new userDAO();
-        User u = ud.getUserByUsernameAndPassword(username, password);
+        User user = ud.getUserByUsername(username);
         
-        if (u != null) {
-            Cookie cookie = new Cookie("user", String.valueOf(u.getUserid()));
+        if (user != null && user.getPassword().equals(password)) {
+            Cookie cookie = new Cookie("uid", String.valueOf(user.getUserid()));
             if (remember) {
                 cookie.setMaxAge(60 * 60 * 24 * 365);
             } else {

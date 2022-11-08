@@ -12,7 +12,7 @@
         <title>Sign in</title>
     </head>
     <body>
-        <!-- mobile -->
+        <!-- Container -->
         <div class="flex flex-col justify-center sm:bg-gray-50">
             <div class="flex justify-center">
                 <form class="mt-32 flex flex-col justify-center rounded-xl sm:border border-gray-200 bg-white p-8" 
@@ -54,8 +54,6 @@
                     </p>
                 </form>
             </div>
-            <div class="h-96"></div>
-            <div class="h-20"></div>
         </div>
     </body>
 </html>

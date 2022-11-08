@@ -12,10 +12,10 @@
         <title>Sign up</title>
     </head>
     <body>
-        <!-- mobile -->
-        <div class="flex flex-col justify-center sm:bg-gray-50">
+        <!-- Container -->
+        <div class="flex flex-col justify-center sm:bg-gray-50 h-screen">
             <div class="flex justify-center">
-                <form class="mt-32 flex flex-col justify-center rounded-xl sm:border border-gray-200 bg-white p-8" action="signup" method="post">
+                <form class="mt-18 flex flex-col justify-center rounded-xl sm:border border-gray-200 bg-white p-8" action="signup" method="post">
                     <div class="hidden">
                         <span>English</span>
                         <i class="bi bi-chevron-down"></i>
@@ -65,7 +65,6 @@
                     <button class="my-6 h-10 bg-blue-400 font-bold text-white opacity-60 hover:opacity-100" type="submit">Sign up</button>
                 </form>
             </div>
-            <div class="h-72"></div>
         </div>
     </body>
 </html>

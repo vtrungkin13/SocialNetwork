@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Post;
+import model.User;
 
 /**
  *
@@ -17,16 +18,16 @@ import model.Post;
  */
 public class postDAO extends DBContext {
 
-    public List<Post> getPosts() {
+    public List<Post> getAllPosts() {
         List<Post> posts = new ArrayList<>();
         userDAO ud = new userDAO();
-        String sql = "select * from [post]";
+        String sql = "SELECT * FROM [Post]";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Post p = new Post(rs.getLong(1), rs.getDate(2), rs.getTime(3),
-                        rs.getString(4), rs.getString(5), ud.getUserByUserid(rs.getLong(6)));
+                        rs.getString(4), rs.getString(5), ud.getUserByUsername(rs.getString(6)));
                 posts.add(p);
             }
         } catch (SQLException e) {
@@ -35,26 +36,26 @@ public class postDAO extends DBContext {
         return posts;
     }
 
-    public List<Post> getPostsOrdered(long userid) {
+    public List<Post> getOrderedPosts(User user) {
         List<Post> posts = new ArrayList<>();
         userDAO ud = new userDAO();
-        String sql = "select p.[postid], p.[date], p.[time], p.[content], p.[attachment], p.[userid], 1 as [order] \n"
-                + "from [post] p join [friend] f on p.[Userid] = f.[friend] \n"
-                + "where f.[user] = ?\n"
-                + "union\n"
-                + "select [postid], [date], [time], [content], [attachment], [userid], 2 as [order] \n"
-                + "from [post] where [userid] not in \n"
-                + "(select [userid] from [post] p join [friend] f on p.[Userid] = f.[friend] \n"
-                + "where f.[user] = ?)\n"
-                + "order by [order], [date] desc, [time] desc";
+        String sql = "SELECT p.*, 1 as [Order]\n"
+                + "FROM [Post] p JOIN [Follow] f on p.[Username] = f.[Following]\n"
+                + "WHERE f.[User] = ?\n"
+                + "UNION\n"
+                + "SELECT *, 2 as [Order]\n"
+                + "FROM [Post] WHERE [Username] NOT IN\n"
+                + "(SELECT [Username] FROM [Post] p JOIN [Follow] f on p.[Username] = f.[Following]\n"
+                + "where f.[User] = ?)\n"
+                + "order by [Order], [Date] desc, [Time] desc";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setLong(1, userid);
-            ps.setLong(2, userid);
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getUsername());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Post p = new Post(rs.getLong(1), rs.getDate(2), rs.getTime(3),
-                        rs.getString(4), rs.getString(5), ud.getUserByUserid(rs.getLong(6)));
+                        rs.getString(4), rs.getString(5), ud.getUserByUsername(rs.getString(6)));
                 posts.add(p);
             }
         } catch (SQLException e) {
@@ -63,33 +64,32 @@ public class postDAO extends DBContext {
         return posts;
     }
 
-    public void addPost(Post p) {
-        String sql = "insert into [post] values (?, cast(getdate() as date), "
-                + "cast(getdate() as time), ?, ?, ?)";
-        long size = getPosts().size();
+    public void addPost(Post post) {
+        String sql = "INSERT INTO [Post]([Content], [Image], [Username])\n"
+                + "VALUES (?, ?, ?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setLong(1, ++size);
-            ps.setString(2, p.getContent());
-            ps.setString(3, p.getAttachment());
-            ps.setLong(4, p.getUser().getUserid());
+            ps.setString(1, post.getContent());
+            ps.setString(2, post.getImage());
+            ps.setString(3, post.getUser().getUsername());
             ps.executeUpdate();
         } catch (SQLException e) {
 
         }
     }
-    
-    public List<Post> getPostsByUserid(long userid) {
+
+    public List<Post> getUserPosts(User user) {
         List<Post> posts = new ArrayList<>();
         userDAO ud = new userDAO();
-        String sql = "select * from [post] where [userid] = ?";
+        String sql = "SELECT * FROM [Post] WHERE [Username] = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setLong(1, userid);
+            ps.setString(1, user.getUsername());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Post p = new Post(rs.getLong(1), rs.getDate(2), rs.getTime(3),
-                        rs.getString(4), rs.getString(5), ud.getUserByUserid(userid));
+                        rs.getString(4), rs.getString(5),
+                        ud.getUserByUsername(user.getUsername()));
                 posts.add(p);
             }
         } catch (SQLException e) {

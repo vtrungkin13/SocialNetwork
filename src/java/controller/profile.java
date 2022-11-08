@@ -5,11 +5,10 @@
 
 package controller;
 
-import dal.friendDAO;
+import dal.followDAO;
 import dal.postDAO;
 import dal.userDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,8 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import model.Friend;
-import model.FriendRequest;
+import model.Follow;
 import model.Post;
 import model.User;
 
@@ -29,30 +27,6 @@ import model.User;
 @WebServlet(name="profile", urlPatterns={"/profile"})
 public class profile extends HttpServlet {
    
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet profile</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet profile at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    } 
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.
@@ -64,25 +38,28 @@ public class profile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        long id = Long.parseLong(request.getParameter("id"));
-        userDAO ud = new userDAO();
-        User user = ud.getUserByUserid(id);
-        request.setAttribute("userSearch", user);
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
         
-        friendDAO fd = new friendDAO();
-        List<Friend> following = fd.getFriendsByUserid(user.getUserid());
-        List<Friend> follower = fd.getFriendsByFriendid(user.getUserid());
-        request.setAttribute("following", following);
-        request.setAttribute("follower", follower);
+        String username = request.getParameter("username");
+        userDAO ud = new userDAO();
+        User searchedUser = ud.getUserByUsername(username);
+        request.setAttribute("searchedUser", searchedUser);
+        
+        followDAO fd = new followDAO();
+        List<Follow> followings = fd.getUserFollowings(searchedUser);
+        List<Follow> followers = fd.getUserFollowers(searchedUser);
+        request.setAttribute("followings", followings);
+        request.setAttribute("followers", followers);
         
         postDAO pd = new postDAO();
-        List<Post> posts = pd.getPostsByUserid(user.getUserid());
-        request.setAttribute("post", posts);
+        List<Post> posts = pd.getUserPosts(searchedUser);
+        request.setAttribute("posts", posts);
         
-        boolean isFriend = fd.isFriend(user.getUserid(), id);
-        boolean isSentFriendRequest = fd.isSentFriendRequest(user.getUserid(), id);
-        request.setAttribute("isFollow", isFriend);
-        request.setAttribute("isSentFriendRequest", isSentFriendRequest);
+        boolean hasFollow = fd.hasFollow(user, searchedUser);
+        boolean hasSentFollowRequest = fd.hasSentFollowRequest(user, searchedUser);
+        request.setAttribute("hasFollow", hasFollow);
+        request.setAttribute("hasSentFollowRequest", hasSentFollowRequest);
         
         request.getRequestDispatcher("profilefriend.jsp").forward(request, response);
     } 
@@ -100,15 +77,15 @@ public class profile extends HttpServlet {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         
-        friendDAO fd = new friendDAO();
-        List<Friend> following = fd.getFriendsByUserid(user.getUserid());
-        List<Friend> follower = fd.getFriendsByFriendid(user.getUserid());
-        request.setAttribute("following", following);
-        request.setAttribute("follower", follower);
+        followDAO fd = new followDAO();
+        List<Follow> followings = fd.getUserFollowings(user);
+        List<Follow> followers = fd.getUserFollowers(user);
+        request.setAttribute("followings", followings);
+        request.setAttribute("followers", followers);
         
         postDAO pd = new postDAO();
-        List<Post> posts = pd.getPostsByUserid(user.getUserid());
-        request.setAttribute("post", posts);
+        List<Post> posts = pd.getUserPosts(user);
+        request.setAttribute("posts", posts);
         
         request.getRequestDispatcher("profile.jsp").forward(request, response);
     }

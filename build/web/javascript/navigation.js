@@ -20,12 +20,6 @@ var imageInput = document.getElementById("image-input")
 var imageInputView = document.getElementById("image-input-view")
 var imageUndo = document.getElementById("image-undo")
 
-// Like + Save
-var heartIconHandler = document.getElementsByClassName("heart-icon")
-var heartFillIconHandler = document.getElementsByClassName("heart-fill-icon")
-var saveIconHandler = document.getElementsByClassName("save-icon")
-var saveFillIconHandler = document.getElementsByClassName("save-fill-icon")
-
 // Search
 var subnavSearchHandler = document.getElementById("subnav-search")
 var searchInputHandler = document.getElementById("search-input")
@@ -76,6 +70,7 @@ searchInputHandler.addEventListener("input", function (e) {
             searchItemHandler[i].style.display = "none";
         }
     }
+
 })
 
 // Search Mobile 
@@ -145,43 +140,6 @@ document.addEventListener("click", function (e) {
     }
 })
 
-// Heart & Save Iteraction
-// Heart
-for (let i = 0; i < heartIconHandler.length; i++) {
-    if (i != null) {
-        heartIconHandler[i].addEventListener("click", function () {
-            heartIconHandler[i].style.display = "none";
-            heartFillIconHandler[i].style.display = "block";
-        })
-    }
-}
-
-for (let i = 0; i < heartFillIconHandler.length; i++) {
-    if (i != null) {
-        heartFillIconHandler[i].addEventListener("click", function () {
-            heartFillIconHandler[i].style.display = "none";
-            heartIconHandler[i].style.display = "block";
-        })
-    }
-}
-// Save
-for (let i = 0; i < saveIconHandler.length; i++) {
-    if (i != null) {
-        saveIconHandler[i].addEventListener("click", function () {
-            saveIconHandler[i].style.display = "none";
-            saveFillIconHandler[i].style.display = "block";
-        })
-    }
-}
-
-for (let i = 0; i < saveFillIconHandler.length; i++) {
-    if (i != null) {
-        saveFillIconHandler[i].addEventListener("click", function () {
-            saveFillIconHandler[i].style.display = "none";
-            saveIconHandler[i].style.display = "block";
-        })
-    }
-}
 // New post handler
 iconNewpostHandler.addEventListener("click", function () {
     newpostHandler.style.visibility = "visible";
